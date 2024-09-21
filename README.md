@@ -1,1 +1,1 @@
-# educompass
+# EduCompass
