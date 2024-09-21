@@ -163,13 +163,12 @@
     starting.addEventListener('change', updateSliderFromInputs)
     ending.addEventListener('change', updateSliderFromInputs)
 
-  // for search
+    // for search 
 
-    document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
     const searchForm = document.querySelector('.blocky-form');
     const searchInput = searchForm.querySelector('.searching-input');
     const resultsContainer = document.querySelector('.course-list'); 
-
 
     searchForm.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -179,7 +178,7 @@
         const query = searchInput.value;
 
         if (query.length >= 2) {
-            fetch(`/search/?q=${query}`, {
+            fetch(`/search-course/?q=${query}`, {
                 method: 'GET',
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest',
@@ -187,30 +186,26 @@
             })
             .then(response => response.json())
             .then(data => {
-                resultsContainer.innerHTML = ''; 
+                resultsContainer.innerHTML = '';
                 let resultsHtml = '';
 
                 if (data.courses.length > 0) {
                     data.courses.forEach(course => {
-                        let days = course.days.length > 0 ? course.days.join(', ') : 'No days available';
-                        let intensive = course.intensive ? '<div class="course-item-day intensive">Intensiv <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f525/512.webp" alt=""></div>' : '';
-                        let courseDaysHtml = course.days.map(day => `<div class="course-item-day">${day}</div>`).join('');
-
                         resultsHtml += `
-                            <a href="/" class="course-item">
-                              <div class="course-item-wrapper">
-                                <img src="${course.edu_center_logo}" alt="${course.name} logo" />
-                                <div class="course-item-text">
-                                  <h1 class="course-item-title">${course.name}</h1>
-                                  <p class="course-item-level">${course.level_name}</p>
-                                  <p class="course-item-days-little">${days}</p>
+                            <a href="#" class="course-item">
+                                <div class="course-item-wrapper">
+                                    <img src="${course.edu_center_logo}" alt="${course.name} logo" />
+                                    <div class="course-item-text">
+                                        <h1 class="course-item-title">${course.name}</h1>
+                                        <p class="course-item-level">${course.level_name}</p>
+                                        <p class="course-item-days-little">${course.days}</p>
+                                    </div>
                                 </div>
-                              </div>
-                              <div class="course-item-days">
-                                ${courseDaysHtml}
-                                ${intensive}
-                                <div class="course-item-time">${course.start_time || 'No time available'}</div>
-                              </div>
+                                <div class="course-item-days">
+                                    ${course.days_html}
+                                    ${course.intensive_html ? `<div class="course-item-day intensive">${course.intensive_html}</div>` : ''}
+                                    <div class="course-item-time">${course.start_time}</div>
+                                </div>
                             </a>
                         `;
                     });
@@ -230,19 +225,22 @@
 });
 
 
+
 {% comment %} for filter {% endcomment %}
 
 document.addEventListener('DOMContentLoaded', function () {
     const filterForm = document.querySelector('.filter-form-second');
-    const resultsContainer = document.querySelector('.course-list');  
+    const resultsContainer = document.querySelector('.course-list'); 
 
     filterForm.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        const formData = new FormData(filterForm);
-        const filterParams = new URLSearchParams(formData).toString();
+        const category = document.querySelector('select[name="category"]').value;
+        const priceMin = document.querySelector('#starting_cost').value;
+        const priceMax = document.querySelector('#ending_cost').value;
+        const teacher = document.querySelector('input[name="teacher"]').value;
 
-        fetch(`/filter/?${filterParams}`, {
+        fetch(`/filter/?category=${category}&price_min=${priceMin}&price_max=${priceMax}&teacher=${teacher}`, {
             method: 'GET',
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',
@@ -250,26 +248,26 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(response => response.json())
         .then(data => {
-            resultsContainer.innerHTML = ''; 
+            resultsContainer.innerHTML = '';
             let resultsHtml = '';
 
             if (data.courses.length > 0) {
                 data.courses.forEach(course => {
                     resultsHtml += `
-                        <a href="/" class="course-item">
-                          <div class="course-item-wrapper">
-                            <img src="${course.edu_center_logo}" alt="${course.name} logo" />
-                            <div class="course-item-text">
-                              <h1 class="course-item-title">${course.name}</h1>
-                              <p class="course-item-level">${course.level_name}</p>
-                              <p class="course-item-days-little">${course.days}</p>
+                        <a href="#" class="course-item">
+                            <div class="course-item-wrapper">
+                                <img src="${course.edu_center_logo}" alt="${course.name} logo" />
+                                <div class="course-item-text">
+                                    <h1 class="course-item-title">${course.name}</h1>
+                                    <p class="course-item-level">${course.level_name}</p>
+                                    <p class="course-item-days-little">${course.days}</p>
+                                </div>
                             </div>
-                          </div>
-                          <div class="course-item-days">
-                            ${course.days_html}
-                            ${course.intensive_html}
-                            <div class="course-item-time">${course.start_time}</div>
-                          </div>
+                            <div class="course-item-days">
+                                ${course.days_html}
+                                ${course.intensive_html}
+                                <div class="course-item-time">${course.start_time}</div>
+                            </div>
                         </a>
                     `;
                 });
@@ -279,7 +277,7 @@ document.addEventListener('DOMContentLoaded', function () {
             resultsContainer.innerHTML = resultsHtml;
         })
         .catch(error => {
-            console.error('Error fetching filter results:', error);
+            console.error('Error fetching filtered results:', error);
             resultsContainer.innerHTML = '<p>Error fetching data</p>';
         });
     });

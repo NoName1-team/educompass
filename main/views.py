@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.generic import ListView
 from django.db.models import Count, Q
-from .models import EduCenter, Course, Category, Events
+from .models import EduCenter, Course, Category, Events, Day, Teacher
 
 
 
@@ -102,64 +102,68 @@ class CourseView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
         context['edu_centers'] = EduCenter.objects.all()
-
         context['events'] = Events.objects.all()
+        context['categories'] = Category.objects.all()
+        context['days'] = Day.objects.all()
+        context['teachers'] = Teacher.objects.all()
+
+        # Add the current GET parameters to context to preserve form inputs
+        context['selected_categories'] = self.request.GET.getlist('categories')
+        context['min_price'] = self.request.GET.get('min_price', '')
+        context['max_price'] = self.request.GET.get('max_price', '')
+        context['selected_gender'] = self.request.GET.get('gender', '')
+        context['selected_days'] = self.request.GET.getlist('days')
 
         return context
-    
 
+    def get_queryset(self):
+        queryset = Course.objects.all()
+        categories = self.request.GET.getlist('categories')
+        min_price = self.request.GET.get('min_price', 0)
+        max_price = self.request.GET.get('max_price', 1000000)
+        gender = self.request.GET.get('gender', None)
+        days = self.request.GET.getlist('days')
+        if categories:
+            queryset = queryset.filter(category__id__in=categories)
+
+        # Step 2: Filter by Price
+        queryset = queryset.filter(price__gte=min_price, price__lte=max_price)
+
+        # Step 3: Filter by Teacher Gender
+        if gender:
+            queryset = queryset.filter(teacher__gender__iexact=gender)
+        if days:
+            queryset = queryset.filter(days__name__in=days)
+        queryset = queryset.distinct()
+
+        return queryset
+
+
+    
 def search_courses(request):
     query = request.GET.get('q', '')
-    courses = Course.objects.filter(name__icontains=query)  
-    course_data = []
+    courses = Course.objects.filter(
+        Q(name__icontains=query) | 
+        Q(level__name__icontains=query) | 
+        Q(days__name__icontains=query)
+    ).select_related('edu_center', 'level').prefetch_related('days').distinct()
 
+    results = []
     for course in courses:
-        course_data.append({
+        days_html = ''.join([f'<div class="course-item-day">{day.name}</div>' for day in course.days.all()])
+        
+        results.append({
             'name': course.name,
-            'edu_center_logo': request.build_absolute_uri(course.edu_center.logo.url),
+            'edu_center_logo': course.edu_center.logo.url if course.edu_center.logo else '',
             'level_name': course.level.name,
-            'days': ', '.join([day.name for day in course.days.all()]),
-            'days_html': ''.join([f'<div class="course-item-day">{day.name}</div>' for day in course.days.all()]),
-            'intensive_html': '<div class="course-item-day intensive">Intensiv</div>' if course.intensive else '',
-            'start_time': course.start_time.strftime('%H:%M')
+            'days_html': days_html,  
+            'start_time': course.start_time.strftime("%H:%M"),
+            'intensive_html': '<div class="course-item-day intensive">Intensive <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f525/512.webp" alt=""/></div>' if course.intensive else '',
         })
-    
-    return JsonResponse({'courses': course_data})
 
-def filter_courses(request):
-    tags = request.GET.getlist('states[]', [])
-    starting_cost = request.GET.get('starting_cost')
-    ending_cost = request.GET.get('ending_cost')
-    teacher_gender = request.GET.getlist('teacher_gender')
-    selected_days = request.GET.getlist('days')
+    return JsonResponse({'courses': results})
 
- 
-    courses = Course.objects.all()
-    if tags:
-        courses = courses.filter(categories__name__in=tags)
-    if starting_cost and ending_cost:
-        courses = courses.filter(price__gte=starting_cost, price__lte=ending_cost)
-    if teacher_gender:
-        courses = courses.filter(teacher__gender__in=teacher_gender)
-    if selected_days:
-        courses = courses.filter(days__name__in=selected_days).distinct()
-
-    course_data = []
-    for course in courses:
-        course_data.append({
-            'name': course.name,
-            'edu_center_logo': request.build_absolute_uri(course.edu_center.logo.url),
-            'level_name': course.level.name,
-            'days': ', '.join([day.name for day in course.days.all()]),
-            'days_html': ''.join([f'<div class="course-item-day">{day.name}</div>' for day in course.days.all()]),
-            'intensive_html': '<div class="course-item-day intensive">Intensiv</div>' if course.intensive else '',
-            'start_time': course.start_time.strftime('%H:%M')
-        })
-    
-    return JsonResponse({'courses': course_data})
-    
 
 class CompaniesView(ListView):
     model = EduCenter
