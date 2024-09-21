@@ -1,0 +1,280 @@
+@media screen and (max-width:1600px) {
+    :root {
+        --main-color: #5667FD;
+        --main-color-dark: #4a58d8;
+        --main-gradiend: linear-gradient(to bottom, #5667FE 100%, #041EFF 100%);
+        --color-yellow: #FED430;
+        --color-green: #52B788;
+        --color-red: #EF233C;
+        --color-dark: #364356;
+        --color-white: #FFFFFF;
+        --color-light-white: #F4F7FA;
+        --color-light-gray: #E9E9E9;
+        --color-gray: #D9D9D9;
+        --color-dark-gray: #ADB5BD;
+    }
+
+    .course-item {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:1300px) {
+    .sidebar-right {
+        display: none;
+    }
+
+    .spec-container {
+        padding: 0 3% 0 calc(20% + 60px);
+    }
+
+    .course-item {
+        width: calc(50% - 5px);
+    }
+
+    .company-detail-scroller i {
+        display: none;
+    }
+
+    .company-detail-scroller {
+        width: 100px;
+        height: 6px;
+        background: var(--main-color);
+        right: 50%;
+        top: 10px;
+        transform: translateX(50%);
+    }
+}
+
+@media screen and (max-width:1200px) {
+    .course-item {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:1100px) {
+    .sidebar-left {
+        width: calc(25% + 40px);
+    }
+
+    .spec-container {
+        padding: 0 3% 0 calc(25% + 61px);
+    }
+
+    .header-sidebar_follower {
+        width: calc(20%);
+    }
+
+    .filter-wrapper {
+        width: calc(25% + 41px);
+        right: calc(-25% - 41px);
+    }
+
+    .company-item {
+        width: calc(33% - 7.5px);
+    }
+}
+
+@media screen and (max-width:900px) {
+    .cat-item {
+        width: calc(50% - 5px);
+    }
+
+    .company-item {
+        width: calc(50% - 5px);
+    }
+}
+
+@media screen and (max-width:800px) {
+    .sidebar-left {
+        width: calc(25% + 40px);
+        left: calc(-25% - 100px);
+    }
+
+    .header-sidebar_follower {
+        display: none;
+    }
+
+    .spec-container {
+        padding: 0 3%;
+    }
+
+    .navbar-container {
+        display: flex;
+    }
+
+    .filter-wrapper {
+        width: calc(30% + 41px);
+        right: calc(-30% - 41px);
+    }
+
+    .company-item {
+        width: calc(33% - 5px);
+    }
+}
+
+@media screen and (max-width:700px) {
+
+    .header-lang_changer,
+    .header-link.first {
+        display: none;
+    }
+
+    .hero-banner-img {
+        display: none;
+    }
+
+    .filter-wrapper {
+        width: calc(50% + 41px);
+        right: calc(-50% - 41px);
+    }
+}
+
+@media screen and (max-width:600px) {
+    .company-item {
+        width: calc(50% - 5px);
+    }
+
+    .event-item img {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:550px) {
+    .searching-form_wrapper {
+        width: 100%;
+    }
+
+    .searching-form_wrapper input {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .searching-form_wrapper button {
+        width: 30%;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .notification.warning p {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .cat-item {
+        width: 100%;
+    }
+
+    .course-item-days-little {
+        font-size: 12px;
+        color: var(--color-dark);
+        display: block;
+    }
+
+    .course-item-day {
+        display: none !important;
+    }
+
+    .searching-form_wrapper {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .filter-wrapper {
+        width: calc(100%);
+        right: calc(-100%);
+        padding-left: 3%;
+    }
+}
+
+@media screen and (max-width:450px) {
+    .blocky-form .searching-input {
+        display: none;
+    }
+
+    .course-heading {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .searching-input {
+        width: 100%;
+    }
+
+    .searching-input.second {
+        display: block;
+        margin-top: 10px;
+    }
+
+    .company-title {
+        font-size: 20px;
+    }
+
+    .company-item_info_wrapper span {
+        font-size: 14px;
+    }
+
+    .company-title svg {
+        width: 18px !important;
+        height: 18px !important;
+    }
+}
+
+@media screen and (max-width:400px) {
+    .searching-form_wrapper button {
+        width: 100%;
+    }
+
+    .searching-recommended-educentre {
+        padding: 12px 8px;
+    }
+.searching-rec-wrapper img {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+}
+
+.searching-company-name {
+    font-size: 14px;
+    align-items: center;
+}
+
+.searching-rec-text-wrapper span {
+    font-size: 12px;
+}
+
+.searching-rec-rating svg {
+    width: 16px !important;
+    height: 16px !important;
+    font-size: 12px;
+}
+
+.searching-rec-rating {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.course-detail-heading {
+    flex-wrap: wrap;
+}
+
+.main-forms_btns {
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.main-forms_btns button,
+.main-forms_btns span {
+    margin-top: 0 !important;
+}
+
+.company-title {
+    font-size: 18px;
+}
+
+.company-title svg {
+    width: 18px !important;
+    height: 18px !important;
+}
+}

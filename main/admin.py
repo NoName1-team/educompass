@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import EduCenter, Course, Events, EducationType, Category, Level, Branch, Day
+from .models import EduCenter, Course, Events, EducationType, Category, Level, Branch, Day, Teacher, Gender
 
 
 @admin.register(EduCenter)
@@ -29,3 +29,5 @@ admin.site.register(EducationType)
 admin.site.register(Level)
 admin.site.register(Branch)
 admin.site.register(Day)
+admin.site.register(Gender)
+admin.site.register(Teacher)

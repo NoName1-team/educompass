@@ -110,3 +110,79 @@
         </div>
     </main>
 {% endblock content %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const searchForm = document.getElementById('search-form');
+    const searchInput = searchForm.querySelector('input[type="text"]');
+    const resultsContainer = document.querySelector('.searching-results_blocks');
+
+    searchForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+    });
+
+    searchInput.addEventListener('keyup', function () {
+        const query = searchInput.value;
+
+        if (query.length >= 2) {
+            fetch(`/search/?q=${query}`, {
+                method: 'GET',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                resultsContainer.innerHTML = ''; 
+
+                let resultsHtml = '';
+                
+                
+                if (data.courses.length > 0) {
+                    resultsHtml += `<p class="searching-heading">Courses</p>`;
+                    data.courses.forEach(course => {
+                        resultsHtml += `
+                            <a href="#" class="searching-rec-educentre">
+                                <div class="searching-rec-wrapper">
+                                    <img src="${course.edu_center_logo}" alt="${course.edu_center_name} logo" />
+                                    <div class="searching-rec-text-wrapper">
+                                        <p class="searching-company-name">${course.name}</p>
+                                        <span>${course.level_name} • ${course.days}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        `;
+                    });
+                }
+             
+                if (data.centers.length > 0) {
+                    resultsHtml += `<p class="searching-heading">EduCenters</p>`;
+                    data.centers.forEach(center => {
+                        resultsHtml += `
+                            <a href="#" class="searching-rec-educentre">
+                                <div class="searching-rec-wrapper">
+                                    <img src="${center.logo}" alt="${center.name} logo" />
+                                    <div class="searching-rec-text-wrapper">
+                                        <p class="searching-company-name">${center.name}</p>
+                                        <span>${center.course_count}ta kurs • ${center.location}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        `;
+                    });
+                }
+                resultsContainer.innerHTML = resultsHtml || '<p>No results found.</p>';
+            })
+            .catch(error => {
+                console.error('Error fetching search results:', error);
+                resultsContainer.innerHTML = '<p>An error occurred while fetching the results. Please try again.</p>';
+            });
+        } else {
+            resultsContainer.innerHTML = ''; 
+        }
+    });
+});
+
+</script>
+{% endblock scripts %}

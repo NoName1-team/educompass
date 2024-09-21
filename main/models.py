@@ -5,6 +5,13 @@ from django.core.validators import RegexValidator
 from django.contrib.auth.models import User
 
 
+
+class Gender(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
 class Level(models.Model):
     name = models.CharField(max_length=255)
 
@@ -62,6 +69,13 @@ class Branch(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Teacher(models.Model):
+    name = models.CharField(max_length=255)
+    gender = models.ForeignKey(Gender, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
 class Course(models.Model):
     name = models.CharField(max_length=255)
@@ -71,7 +85,7 @@ class Course(models.Model):
     start_date = models.DateTimeField()
     now_place = models.IntegerField()
     current_place = models.IntegerField()
-    teacher = models.CharField(max_length=255)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, default=None)
     price = models.IntegerField()
     level = models.ForeignKey(Level, on_delete=models.CASCADE)
     start_time = models.TimeField()  
