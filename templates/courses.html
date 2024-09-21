@@ -1,774 +1,164 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="title" content="EduCompass - Bosh sahifa">
-    <meta name="description"
-        content="EduCompass - O'qish uchun eng yaxshi kurslarni topish va tanlash uchun ishonchli platforma. Biz sizga turli o'quv markazlarida mavjud kurslarni qidirish, solishtirish va ro'yxatdan o'tish imkoniyatini taqdim etamiz. Bizning maqsadimiz sizning ta'lim ehtiyojlaringizni qondirishda yordam berishdir.">
-    <meta name="keywords"
-        content="ta'lim, o'quv markazlari, kurslar, ta'lim xizmatlari, EduCompass, o'qish, darslar, kurs qidirish, ta'lim resurslari">
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="EduCompass">
+{% block styles %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.css" />
+{% endblock %}
 
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://educompass.uz/">
-    <meta property="og:title" content="EduCompass - Bosh sahifa">
-    <meta property="og:description"
-        content="EduCompass - O'qish uchun eng yaxshi kurslarni topish va tanlash uchun ishonchli platforma. Biz sizga turli o'quv markazlarida mavjud kurslarni qidirish, solishtirish va ro'yxatdan o'tish imkoniyatini taqdim etamiz. Bizning maqsadimiz sizning ta'lim ehtiyojlaringizni qondirishda yordam berishdir.">
-    <meta property="og:image" content="https://educompass-front-end.netlify.app/assets/imgs/logo-icon.svg">
-    <link rel="icon" type="image/x-icon" href="https://educompass-front-end.netlify.app/assets/imgs/logo-icon.svg">
-    <meta property="og:locale" content="uz_UZ">
-    <meta property="og:site_name" content="EduCompass">
+{% block content %}
+  <main>
+    <div class="courses starting-block">
+      <div class="section-wrapp">
+        <div class="spec-container">
+          <div class="course-wrapper">
+            <div class="course-heading">
+              <h1 class="block-header section-heading">Kurslar</h1>
+              <form action="" class="blocky-form">
+                <input type="text" class="searching-input" placeholder="SAT kurs" />
+                <span class="filter-opener">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3.48596 18.6941V1.93652C3.48596 1.73122 3.4044 1.53432 3.25923 1.38914C3.11405 1.24397 2.91715 1.16241 2.71184 1.16241C2.50654 1.16241 2.30964 1.24397 2.16446 1.38914C2.01929 1.53432 1.93773 1.73122 1.93773 1.93652V18.6941C1.31406 18.8801 0.778149 19.2843 0.428004 19.8329C0.0778598 20.3815 -0.0631244 21.0378 0.0308319 21.6818C0.124788 22.3257 0.447407 22.9144 0.939694 23.3401C1.43198 23.7657 2.06104 24 2.71184 24C3.36265 24 3.99171 23.7657 4.484 23.3401C4.97628 22.9144 5.2989 22.3257 5.39286 21.6818C5.48681 21.0378 5.34583 20.3815 4.99569 19.8329C4.64554 19.2843 4.10963 18.8801 3.48596 18.6941ZM24 2.71064C24.0002 2.2081 23.8607 1.71541 23.5969 1.28762C23.3332 0.859841 22.9558 0.513828 22.5067 0.288265C22.0576 0.062701 21.5547 -0.0335245 21.0541 0.0103444C20.5534 0.0542133 20.0749 0.236448 19.6719 0.536677C19.2689 0.836907 18.9573 1.2433 18.7721 1.71043C18.5868 2.17756 18.5351 2.68701 18.6227 3.18185C18.7103 3.67668 18.9338 4.1374 19.2683 4.51249C19.6027 4.88758 20.0349 5.16227 20.5165 5.30585V22.0635C20.5165 22.2688 20.598 22.4657 20.7432 22.6109C20.8884 22.756 21.0853 22.8376 21.2906 22.8376C21.4959 22.8376 21.6928 22.756 21.8379 22.6109C21.9831 22.4657 22.0647 22.2688 22.0647 22.0635V5.30585C22.6233 5.13866 23.1132 4.79595 23.4618 4.3285C23.8104 3.86105 23.9991 3.29375 24 2.71064ZM12.7753 9.40478V1.93652C12.7753 1.73122 12.6938 1.53432 12.5486 1.38914C12.4034 1.24397 12.2065 1.16241 12.0012 1.16241C11.7959 1.16241 11.599 1.24397 11.4538 1.38914C11.3087 1.53432 11.2271 1.73122 11.2271 1.93652V9.40478C10.6681 9.57126 10.1777 9.9138 9.82909 10.3814C9.48044 10.849 9.2921 11.4167 9.2921 12C9.2921 12.5833 9.48044 13.151 9.82909 13.6186C10.1777 14.0862 10.6681 14.4287 11.2271 14.5952V22.0635C11.2271 22.2688 11.3087 22.4657 11.4538 22.6109C11.599 22.756 11.7959 22.8376 12.0012 22.8376C12.2065 22.8376 12.4034 22.756 12.5486 22.6109C12.6938 22.4657 12.7753 22.2688 12.7753 22.0635V14.5952C13.3343 14.4287 13.8247 14.0862 14.1733 13.6186C14.522 13.151 14.7103 12.5833 14.7103 12C14.7103 11.4167 14.522 10.849 14.1733 10.3814C13.8247 9.9138 13.3343 9.57126 12.7753 9.40478Z" fill="#5667FD" />
+                  </svg>
+                </span>
 
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://educompass.uz/">
-    <meta property="twitter:title" content="EduCompass - Bosh sahifa">
-    <meta property="twitter:description"
-        content="EduCompass - O'qish uchun eng yaxshi kurslarni topish va tanlash uchun ishonchli platforma.">
-    <meta property="twitter:image" content="https://educompass-front-end.netlify.app/assets/imgs/logo-icon.svg">
-    <meta property="twitter:site" content="@EduCompass">
-    <meta property="twitter:creator" content="@EduCompass">
+                <div class="filter-wrapper">
+                  <div class="filter-heading-wrapper">
+                    <p class="block-heading">Filter</p>
+                    <span class="form-closer"><i class="fa-regular fa-xmark-large"></i></span>
+                  </div>
+                  <p class="filter-block-heading">Teglar</p>
+                  <select class="jquery-multiple filter-input" name="states[]" multiple="multiple">
+                    <option value="english">Ingliz tili</option>
+                    <option value="russian">Rus tili</option>
+                    <option value="programming">Dasturlash</option>
+                    <option value="pure_subjects">Tabiy fanlar</option>
+                    <option value="sat">SAT</option>
+                  </select>
+                  <p class="filter-block-heading">Narxlar</p>
+                  <div class="filter-costs_wrapper">
+                    <input type="number" id="staring_cost" />
+                    <input type="number" id="ending_cost" />
+                  </div>
+                  <div id="slider"></div>
+                  <div id="range-values"></div>
 
-    <!-- Libs -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/all.css">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.8.1/nouislider.css">
+                  <p class="filter-block-heading">O'qituvchi</p>
 
-    <!-- Local -->
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/responsive.css">
-    <title>EduCompass - Bosh sahifa</title>
-</head>
+                  <div class="filter-gender-wrapper">
+                    <span class="id_male"><i class="fa-regular fa-mars"></i> Erkak</span>
+                    <span class="id_female"><i class="fa-regular fa-venus"></i> Ayol</span>
+                    <input type="checkbox" id="id_male" />
+                    <input type="checkbox" id="id_female" />
+                  </div>
 
-<body>
-    <header>
-        <div class="section-wrapp">
-            <div class="container">
-                <div class="header-wrapper">
-                    <a href="/" class="header-logo">
-                        <img src="./assets/imgs/logo.svg" alt="logo">
-                    </a>
-                    <div class="header-links">
-                        <a href="#" class="header-link first spec-round">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M7.99983 22H15.9998C20.0198 22 20.7398 20.39 20.9498 18.43L21.6998 10.43C21.9698 7.99 21.2698 6 16.9998 6H6.99983C2.72983 6 2.02983 7.99 2.29983 10.43L3.04983 18.43C3.25983 20.39 3.97983 22 7.99983 22Z"
-                                    stroke="#ADB5BD" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M8 6V5.2C8 3.43 8 2 11.2 2H12.8C16 2 16 3.43 16 5.2V6" stroke="#ADB5BD"
-                                    stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path
-                                    d="M14 13V14C14 14.01 14 14.01 14 14.02C14 15.11 13.99 16 12 16C10.02 16 10 15.12 10 14.03V13C10 12 10 12 11 12H13C14 12 14 12 14 13Z"
-                                    stroke="#ADB5BD" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M21.65 11C19.34 12.68 16.7 13.68 14 14.02" stroke="#ADB5BD" stroke-width="1.5"
-                                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M2.62012 11.27C4.87012 12.81 7.41012 13.74 10.0001 14.03" stroke="#ADB5BD"
-                                    stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                            EduCompass Biznes
-                        </a>
-                        <div class="header-lang_changer spec-round">
-                            <div class="header-currect_lang">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M14.1584 7.4668H5.8418" stroke="#ADB5BD" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M10 6.06689V7.46689" stroke="#ADB5BD" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M12.0835 7.4502C12.0835 11.0335 9.2835 13.9335 5.8335 13.9335"
-                                        stroke="#ADB5BD" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M14.1667 13.9333C12.6667 13.9333 11.3333 13.1333 10.375 11.875"
-                                        stroke="#ADB5BD" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path
-                                        d="M7.49984 18.3332H12.4998C16.6665 18.3332 18.3332 16.6665 18.3332 12.4998V7.49984C18.3332 3.33317 16.6665 1.6665 12.4998 1.6665H7.49984C3.33317 1.6665 1.6665 3.33317 1.6665 7.49984V12.4998C1.6665 16.6665 3.33317 18.3332 7.49984 18.3332Z"
-                                        stroke="#ADB5BD" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-                                <span>Uz</span>
-                                <i class="fa-regular fa-chevron-down"></i>
-                            </div>
-                        </div>
-                        <!-- <span class="spec-round header-changer"><i class="fa-regular fa-moon"></i></span> -->
-                        <a href="#" class="header-link login spec-round">
-                            Kirish
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11.6802 14.62L14.2402 12.06L11.6802 9.5" stroke="white" stroke-width="1.5"
-                                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M4 12.0601H14.17" stroke="white" stroke-width="1.5" stroke-miterlimit="10"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M12 4C16.42 4 20 7 20 12C20 17 16.42 20 12 20" stroke="white"
-                                    stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </a>
-                    </div>
+                  <p class="filter-block-heading">Kunlari</p>
+                  <div class="filter-days-wrapper">
+                    <span class="id_mon">Du</span>
+                    <span class="id_tue">Se</span>
+                    <span class="id_wed">Ch</span>
+                    <span class="id_thu">Pa</span>
+                    <span class="id_fri">Ju</span>
+                    <span class="id_sat red">Sh</span>
+                    <span class="id_sun red">Ya</span>
+                    <input type="checkbox" id="id_mon" />
+                    <input type="checkbox" id="id_tue" />
+                    <input type="checkbox" id="id_wed" />
+                    <input type="checkbox" id="id_thu" />
+                    <input type="checkbox" id="id_fri" />
+                    <input type="checkbox" id="id_sat" />
+                    <input type="checkbox" id="id_sun" />
+                  </div>
+
+                  <span class="form-closer cancel-span">Bekor qilish</span>
+                  <button class="submit-form">Saralash</button>
                 </div>
+              </form>
+              <input type="text" class="searching-input second" placeholder="SAT kurs" />
             </div>
+
+            <div class="course-list">
+              {% for course in courses %}
+                <a href="" class="course-item">
+                  <div class="course-item-wrapper">
+                    <img src="{{ course.edu_center.logo.url }}" alt="" />
+                    <div class="course-item-text">
+                      <h1 class="course-item-title">{{ course.name }}</h1>
+                      <p class="course-item-level">{{ course.level.name }}</p>
+                      <p class="course-item-days-little">
+                        {% for day in course.days.all %}
+                          {{ day.name }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="course-item-days">
+                    {% for day in course.days.all %}
+                      <div class="course-item-day {% if day.name == 'Har kuni' %} everyday {% endif %}">{{ day.name }}</div>
+                    {% endfor %}
+                    {% if course.intensive == True %}
+                      <div class="course-item-day intensive">
+                        Intensiv
+                        <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f525/512.webp" alt="" />
+                      </div>
+                    {% endif %}
+                    <div class="course-item-time">{{ course.start_time|date:'H:i' }}</div>
+                  </div>
+                </a>
+              {% endfor %}
+            </div>
+          </div>
         </div>
-    </header>
-    <main>
-        <div class="hero">
-            <div class="section-wrapp">
-                <div class="container">
-                    <div class="sidebar-left">
-                        <p class="block-heading">Asosiy</p>
-                        <div class="siderbar-links">
-                            <a href="./index.html" class="sidebar-link">
-                                <svg width="25" height="25" viewBox="0 0 24 25" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M16.7002 19.4799H7.3002C6.8802 19.4799 6.4102 19.1499 6.2702 18.7499L2.1302 7.16986C1.5402 5.50986 2.2302 4.99986 3.6502 6.01986L7.5502 8.80986C8.2002 9.25986 8.9402 9.02986 9.2202 8.29986L10.9802 3.60986C11.5402 2.10986 12.4702 2.10986 13.0302 3.60986L14.7902 8.29986C15.0702 9.02986 15.8102 9.25986 16.4502 8.80986L20.1102 6.19986C21.6702 5.07986 22.4202 5.64986 21.7802 7.45986L17.7402 18.7699C17.5902 19.1499 17.1202 19.4799 16.7002 19.4799Z"
-                                        stroke="#364356" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M6.5 22.5H17.5" stroke="#364356" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M9.5 14.5H14.5" stroke="#364356" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-                                Bosh sahifa
-                            </a>
-                            <a href="./categories.html" class="sidebar-link">
-                                <svg width="24" height="25" viewBox="0 0 24 25" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M13.01 3.41982L18.91 6.03982C20.61 6.78982 20.61 8.02982 18.91 8.77982L13.01 11.3998C12.34 11.6998 11.24 11.6998 10.57 11.3998L4.67002 8.77982C2.97002 8.02982 2.97002 6.78982 4.67002 6.03982L10.57 3.41982C11.24 3.11982 12.34 3.11982 13.01 3.41982Z"
-                                        stroke="#364356" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path
-                                        d="M3 11.5C3 12.34 3.63 13.31 4.4 13.65L11.19 16.67C11.71 16.9 12.3 16.9 12.81 16.67L19.6 13.65C20.37 13.31 21 12.34 21 11.5"
-                                        stroke="#364356" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path
-                                        d="M3 16.5C3 17.43 3.55 18.27 4.4 18.65L11.19 21.67C11.71 21.9 12.3 21.9 12.81 21.67L19.6 18.65C20.45 18.27 21 17.43 21 16.5"
-                                        stroke="#364356" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-                                Kategoriyalar
-                            </a>
-                            <a href="./courses.html" class="sidebar-link active">
-                                <svg width="24" height="25" viewBox="0 0 24 25" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M21.6602 10.94L20.6802 15.12C19.8402 18.73 18.1802 20.19 15.0602 19.89C14.5602 19.85 14.0202 19.76 13.4402 19.62L11.7602 19.22C7.59018 18.23 6.30018 16.17 7.28018 11.99L8.26018 7.80001C8.46018 6.95001 8.70018 6.21001 9.00018 5.60001C10.1702 3.18001 12.1602 2.53001 15.5002 3.32001L17.1702 3.71001C21.3602 4.69001 22.6402 6.76001 21.6602 10.94Z"
-                                        stroke="#364356" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path
-                                        d="M15.0599 19.8901C14.4399 20.3101 13.6599 20.6601 12.7099 20.9701L11.1299 21.4901C7.15985 22.7701 5.06985 21.7001 3.77985 17.7301L2.49985 13.7801C1.21985 9.8101 2.27985 7.7101 6.24985 6.4301L7.82985 5.9101C8.23985 5.7801 8.62985 5.6701 8.99985 5.6001C8.69985 6.2101 8.45985 6.9501 8.25985 7.8001L7.27985 11.9901C6.29985 16.1701 7.58985 18.2301 11.7599 19.2201L13.4399 19.6201C14.0199 19.7601 14.5599 19.8501 15.0599 19.8901Z"
-                                        stroke="#364356" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M12.6401 9.02979L17.4901 10.2598" stroke="#364356" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M11.6602 12.8999L14.5602 13.6399" stroke="#364356" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                                Kurslar
-                            </a>
-                            <a href="./companies.html" class="sidebar-link"><svg width="24" height="25"
-                                    viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M6.70001 18.5H4.15002C2.72002 18.5 2 17.78 2 16.35V4.65002C2 3.22002 2.72002 2.5 4.15002 2.5H8.45001C9.88001 2.5 10.6 3.22002 10.6 4.65002V6.5"
-                                        stroke="#364356" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path
-                                        d="M17.3702 8.91998V20.08C17.3702 21.69 16.5702 22.5 14.9602 22.5H9.12018C7.51018 22.5 6.7002 21.69 6.7002 20.08V8.91998C6.7002 7.30998 7.51018 6.5 9.12018 6.5H14.9602C16.5702 6.5 17.3702 7.30998 17.3702 8.91998Z"
-                                        stroke="#364356" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path
-                                        d="M13.3999 6.5V4.65002C13.3999 3.22002 14.1199 2.5 15.5499 2.5H19.8499C21.2799 2.5 21.9999 3.22002 21.9999 4.65002V16.35C21.9999 17.78 21.2799 18.5 19.8499 18.5H17.3699"
-                                        stroke="#364356" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M10 11.5H14" stroke="#364356" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M10 14.5H14" stroke="#364356" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M12 22.5V19.5" stroke="#364356" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                                O'quv markazlar
-                            </a>
-                            <a href="./co-workings.html" class="sidebar-link"><svg width="24" height="25"
-                                    viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M3 9.5C4.10457 9.5 5 8.60457 5 7.5C5 6.39543 4.10457 5.5 3 5.5C1.89543 5.5 1 6.39543 1 7.5C1 8.60457 1.89543 9.5 3 9.5Z"
-                                        stroke="#364356" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path
-                                        d="M21 9.5C22.1046 9.5 23 8.60457 23 7.5C23 6.39543 22.1046 5.5 21 5.5C19.8954 5.5 19 6.39543 19 7.5C19 8.60457 19.8954 9.5 21 9.5Z"
-                                        stroke="#364356" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M19 7.5H15" stroke="#364356" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M9 7.5H5" stroke="#364356" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path
-                                        d="M7.5 17V19C7.5 19.61 7.13 20.14 6.61 20.36C6.42 20.45 6.22 20.5 6 20.5H4C3.17 20.5 2.5 19.83 2.5 19V17C2.5 16.17 3.17 15.5 4 15.5H6C6.83 15.5 7.5 16.17 7.5 17Z"
-                                        stroke="#364356" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path
-                                        d="M21.5 17V19C21.5 19.83 20.83 20.5 20 20.5H18C17.78 20.5 17.58 20.45 17.39 20.36C16.87 20.14 16.5 19.61 16.5 19V17C16.5 16.17 17.17 15.5 18 15.5H20C20.83 15.5 21.5 16.17 21.5 17Z"
-                                        stroke="#364356" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path
-                                        d="M15 6V9C15 9.82 14.32 10.5 13.5 10.5H10.5C9.68 10.5 9 9.82 9 9V6C9 5.18 9.68 4.5 10.5 4.5H13.5C14.32 4.5 15 5.18 15 6Z"
-                                        stroke="#364356" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M15 8.22998C17.37 9.42998 19 12.01 19 15C19 15.17 18.99 15.33 18.97 15.5"
-                                        stroke="#364356" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M5.03 15.5C5.01 15.33 5 15.17 5 15C5 12.01 6.63 9.42998 9 8.22998"
-                                        stroke="#364356" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                                Co-working zonalar
-                            </a>
+      </div>
+    </div>
+  </main>
+{% endblock %}
 
-                            <div class="header-sidebar_follower"></div>
-                        </div>
-
-                        <div class="sidebar-heading">
-                            <a href="#">
-                                <p class="block-heading">O'quv markazlar</p>
-                                <i class="fa-regular fa-arrow-right"></i>
-                            </a>
-                        </div>
-                        <div class="siderbar-edu-links">
-                            <a href="#" class="sidebar-edu-link">
-                                <img src="./assets/imgs/edu centers/e-life.png" alt="">
-                                <span>English Life</span>
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M10.7499 2.44982C11.4399 1.85982 12.5699 1.85982 13.2699 2.44982L14.8499 3.80982C15.1499 4.06982 15.7099 4.27982 16.1099 4.27982H17.8099C18.8699 4.27982 19.7399 5.14982 19.7399 6.20982V7.90982C19.7399 8.29982 19.9499 8.86982 20.2099 9.16982L21.5699 10.7498C22.1599 11.4398 22.1599 12.5698 21.5699 13.2698L20.2099 14.8498C19.9499 15.1498 19.7399 15.7098 19.7399 16.1098V17.8098C19.7399 18.8698 18.8699 19.7398 17.8099 19.7398H16.1099C15.7199 19.7398 15.1499 19.9498 14.8499 20.2098L13.2699 21.5698C12.5799 22.1598 11.4499 22.1598 10.7499 21.5698L9.16988 20.2098C8.86988 19.9498 8.30988 19.7398 7.90988 19.7398H6.17988C5.11988 19.7398 4.24988 18.8698 4.24988 17.8098V16.0998C4.24988 15.7098 4.03988 15.1498 3.78988 14.8498L2.43988 13.2598C1.85988 12.5698 1.85988 11.4498 2.43988 10.7598L3.78988 9.16982C4.03988 8.86982 4.24988 8.30982 4.24988 7.91982V6.19982C4.24988 5.13982 5.11988 4.26982 6.17988 4.26982H7.90988C8.29988 4.26982 8.86988 4.05982 9.16988 3.79982L10.7499 2.44982Z"
-                                        fill="#ED1B24" stroke="#CF0F17" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M8.37988 12.0001L10.7899 14.4201L15.6199 9.58008" stroke="#FFF"
-                                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </a>
-                            <a href="#" class="sidebar-edu-link">
-                                <img src="./assets/imgs/edu centers/marstiff.png" alt="">
-                                <span>Marstiff SAT</span>
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M10.7499 2.44982C11.4399 1.85982 12.5699 1.85982 13.2699 2.44982L14.8499 3.80982C15.1499 4.06982 15.7099 4.27982 16.1099 4.27982H17.8099C18.8699 4.27982 19.7399 5.14982 19.7399 6.20982V7.90982C19.7399 8.29982 19.9499 8.86982 20.2099 9.16982L21.5699 10.7498C22.1599 11.4398 22.1599 12.5698 21.5699 13.2698L20.2099 14.8498C19.9499 15.1498 19.7399 15.7098 19.7399 16.1098V17.8098C19.7399 18.8698 18.8699 19.7398 17.8099 19.7398H16.1099C15.7199 19.7398 15.1499 19.9498 14.8499 20.2098L13.2699 21.5698C12.5799 22.1598 11.4499 22.1598 10.7499 21.5698L9.16988 20.2098C8.86988 19.9498 8.30988 19.7398 7.90988 19.7398H6.17988C5.11988 19.7398 4.24988 18.8698 4.24988 17.8098V16.0998C4.24988 15.7098 4.03988 15.1498 3.78988 14.8498L2.43988 13.2598C1.85988 12.5698 1.85988 11.4498 2.43988 10.7598L3.78988 9.16982C4.03988 8.86982 4.24988 8.30982 4.24988 7.91982V6.19982C4.24988 5.13982 5.11988 4.26982 6.17988 4.26982H7.90988C8.29988 4.26982 8.86988 4.05982 9.16988 3.79982L10.7499 2.44982Z"
-                                        fill="#32B44A" stroke="#163A30" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M8.37988 12.0001L10.7899 14.4201L15.6199 9.58008" stroke="#163A30"
-                                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </a>
-                            <a href="#" class="sidebar-edu-link">
-                                <img src="./assets/imgs/edu centers/robocode.png" alt="">
-                                <span>Robocode</span>
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M10.7499 2.44982C11.4399 1.85982 12.5699 1.85982 13.2699 2.44982L14.8499 3.80982C15.1499 4.06982 15.7099 4.27982 16.1099 4.27982H17.8099C18.8699 4.27982 19.7399 5.14982 19.7399 6.20982V7.90982C19.7399 8.29982 19.9499 8.86982 20.2099 9.16982L21.5699 10.7498C22.1599 11.4398 22.1599 12.5698 21.5699 13.2698L20.2099 14.8498C19.9499 15.1498 19.7399 15.7098 19.7399 16.1098V17.8098C19.7399 18.8698 18.8699 19.7398 17.8099 19.7398H16.1099C15.7199 19.7398 15.1499 19.9498 14.8499 20.2098L13.2699 21.5698C12.5799 22.1598 11.4499 22.1598 10.7499 21.5698L9.16988 20.2098C8.86988 19.9498 8.30988 19.7398 7.90988 19.7398H6.17988C5.11988 19.7398 4.24988 18.8698 4.24988 17.8098V16.0998C4.24988 15.7098 4.03988 15.1498 3.78988 14.8498L2.43988 13.2598C1.85988 12.5698 1.85988 11.4498 2.43988 10.7598L3.78988 9.16982C4.03988 8.86982 4.24988 8.30982 4.24988 7.91982V6.19982C4.24988 5.13982 5.11988 4.26982 6.17988 4.26982H7.90988C8.29988 4.26982 8.86988 4.05982 9.16988 3.79982L10.7499 2.44982Z"
-                                        fill="#9B53F5" stroke="#6E27C1" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M8.37988 12.0001L10.7899 14.4201L15.6199 9.58008" stroke="#FFF"
-                                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </a>
-                            <a href="#" class="sidebar-edu-link">
-                                <img src="./assets/imgs/edu centers/registan.png" alt="">
-                                <span>Registan LC</span>
-                            </a>
-                            <a href="#" class="sidebar-edu-link">
-                                <img src="./assets/imgs/edu centers/texnopark.png" alt="">
-                                <span>Texnopark</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="sidebar-right">
-                        <p class="block-heading">Eventlar</p>
-                        <div class="swiper">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="./assets/imgs/image.png" alt="">
-                                    <div class="event-wrapper">
-                                        <a href="#">
-                                            <p>IELTS Marafon</p>
-                                            <i class="fa-regular fa-arrow-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide"><img src="./assets/imgs/image.png" alt="">
-                                    <div class="event-wrapper">
-                                        <a href="#">
-                                            <p>IELTS Marafon</p>
-                                            <i class="fa-regular fa-arrow-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide"><img src="./assets/imgs/image.png" alt="">
-                                    <div class="event-wrapper">
-                                        <a href="#">
-                                            <p>IELTS Marafon</p>
-                                            <i class="fa-regular fa-arrow-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-pagination"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="navbar-container">
-                    <a href="./index.html" class="navbar-link">
-                        <svg class="current" width="24" height="25" viewBox="0 0 24 25" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M16.7002 19.4799H7.3002C6.8802 19.4799 6.4102 19.1499 6.2702 18.7499L2.1302 7.16986C1.5402 5.50986 2.2302 4.99986 3.6502 6.01986L7.5502 8.80986C8.2002 9.25986 8.9402 9.02986 9.2202 8.29986L10.9802 3.60986C11.5402 2.10986 12.4702 2.10986 13.0302 3.60986L14.7902 8.29986C15.0702 9.02986 15.8102 9.25986 16.4502 8.80986L20.1102 6.19986C21.6702 5.07986 22.4202 5.64986 21.7802 7.45986L17.7402 18.7699C17.5902 19.1499 17.1202 19.4799 16.7002 19.4799Z"
-                                stroke="#364356" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M6.5 22.5H17.5" stroke="#364356" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M9.5 14.5H14.5" stroke="#364356" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                    </a>
-                    <a href="./categories.html" class="navbar-link">
-                        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M13.01 3.41982L18.91 6.03982C20.61 6.78982 20.61 8.02982 18.91 8.77982L13.01 11.3998C12.34 11.6998 11.24 11.6998 10.57 11.3998L4.67002 8.77982C2.97002 8.02982 2.97002 6.78982 4.67002 6.03982L10.57 3.41982C11.24 3.11982 12.34 3.11982 13.01 3.41982Z"
-                                stroke="#364356" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M3 11.5C3 12.34 3.63 13.31 4.4 13.65L11.19 16.67C11.71 16.9 12.3 16.9 12.81 16.67L19.6 13.65C20.37 13.31 21 12.34 21 11.5"
-                                stroke="#364356" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M3 16.5C3 17.43 3.55 18.27 4.4 18.65L11.19 21.67C11.71 21.9 12.3 21.9 12.81 21.67L19.6 18.65C20.45 18.27 21 17.43 21 16.5"
-                                stroke="#364356" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </a>
-                    <a href="./courses.html" class="navbar-link active">
-                        <svg class="current" width="24" height="25" viewBox="0 0 24 25" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M21.6602 10.94L20.6802 15.12C19.8402 18.73 18.1802 20.19 15.0602 19.89C14.5602 19.85 14.0202 19.76 13.4402 19.62L11.7602 19.22C7.59018 18.23 6.30018 16.17 7.28018 11.99L8.26018 7.80001C8.46018 6.95001 8.70018 6.21001 9.00018 5.60001C10.1702 3.18001 12.1602 2.53001 15.5002 3.32001L17.1702 3.71001C21.3602 4.69001 22.6402 6.76001 21.6602 10.94Z"
-                                stroke="#364356" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M15.0599 19.8901C14.4399 20.3101 13.6599 20.6601 12.7099 20.9701L11.1299 21.4901C7.15985 22.7701 5.06985 21.7001 3.77985 17.7301L2.49985 13.7801C1.21985 9.8101 2.27985 7.7101 6.24985 6.4301L7.82985 5.9101C8.23985 5.7801 8.62985 5.6701 8.99985 5.6001C8.69985 6.2101 8.45985 6.9501 8.25985 7.8001L7.27985 11.9901C6.29985 16.1701 7.58985 18.2301 11.7599 19.2201L13.4399 19.6201C14.0199 19.7601 14.5599 19.8501 15.0599 19.8901Z"
-                                stroke="#364356" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M12.6401 9.02979L17.4901 10.2598" stroke="#364356" stroke-width="1.5"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M11.6602 12.8999L14.5602 13.6399" stroke="#364356" stroke-width="1.5"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <svg class="arrow" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M19.9201 15.0898L13.4001 8.56984C12.6301 7.79984 11.3701 7.79984 10.6001 8.56984L4.08008 15.0898"
-                                stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                    </a>
-                    <a href="./companies.html" class="navbar-link">
-                        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M6.70001 18.5H4.15002C2.72002 18.5 2 17.78 2 16.35V4.65002C2 3.22002 2.72002 2.5 4.15002 2.5H8.45001C9.88001 2.5 10.6 3.22002 10.6 4.65002V6.5"
-                                stroke="#364356" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path
-                                d="M17.3702 8.91998V20.08C17.3702 21.69 16.5702 22.5 14.9602 22.5H9.12018C7.51018 22.5 6.7002 21.69 6.7002 20.08V8.91998C6.7002 7.30998 7.51018 6.5 9.12018 6.5H14.9602C16.5702 6.5 17.3702 7.30998 17.3702 8.91998Z"
-                                stroke="#364356" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path
-                                d="M13.3999 6.5V4.65002C13.3999 3.22002 14.1199 2.5 15.5499 2.5H19.8499C21.2799 2.5 21.9999 3.22002 21.9999 4.65002V16.35C21.9999 17.78 21.2799 18.5 19.8499 18.5H17.3699"
-                                stroke="#364356" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M10 11.5H14" stroke="#364356" stroke-width="1.5" stroke-miterlimit="10"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M10 14.5H14" stroke="#364356" stroke-width="1.5" stroke-miterlimit="10"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M12 22.5V19.5" stroke="#364356" stroke-width="1.5" stroke-miterlimit="10"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-
-                    </a>
-                    <a href="./co-workings.html" class="navbar-link">
-                        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M3 9.5C4.10457 9.5 5 8.60457 5 7.5C5 6.39543 4.10457 5.5 3 5.5C1.89543 5.5 1 6.39543 1 7.5C1 8.60457 1.89543 9.5 3 9.5Z"
-                                stroke="#364356" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path
-                                d="M21 9.5C22.1046 9.5 23 8.60457 23 7.5C23 6.39543 22.1046 5.5 21 5.5C19.8954 5.5 19 6.39543 19 7.5C19 8.60457 19.8954 9.5 21 9.5Z"
-                                stroke="#364356" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M19 7.5H15" stroke="#364356" stroke-width="1.5" stroke-miterlimit="10"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M9 7.5H5" stroke="#364356" stroke-width="1.5" stroke-miterlimit="10"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M7.5 17V19C7.5 19.61 7.13 20.14 6.61 20.36C6.42 20.45 6.22 20.5 6 20.5H4C3.17 20.5 2.5 19.83 2.5 19V17C2.5 16.17 3.17 15.5 4 15.5H6C6.83 15.5 7.5 16.17 7.5 17Z"
-                                stroke="#364356" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path
-                                d="M21.5 17V19C21.5 19.83 20.83 20.5 20 20.5H18C17.78 20.5 17.58 20.45 17.39 20.36C16.87 20.14 16.5 19.61 16.5 19V17C16.5 16.17 17.17 15.5 18 15.5H20C20.83 15.5 21.5 16.17 21.5 17Z"
-                                stroke="#364356" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path
-                                d="M15 6V9C15 9.82 14.32 10.5 13.5 10.5H10.5C9.68 10.5 9 9.82 9 9V6C9 5.18 9.68 4.5 10.5 4.5H13.5C14.32 4.5 15 5.18 15 6Z"
-                                stroke="#364356" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M15 8.22998C17.37 9.42998 19 12.01 19 15C19 15.17 18.99 15.33 18.97 15.5"
-                                stroke="#364356" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M5.03 15.5C5.01 15.33 5 15.17 5 15C5 12.01 6.63 9.42998 9 8.22998" stroke="#364356"
-                                stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-
-                    </a>
-                </div>
-            </div>
-
-            <div class="notifications-wrapper">
-                <div class="notification error">
-                    <p><i class="fa-solid fa-wifi-slash"></i> Internet aloqasi uzildi <a href="/"><i
-                                class="fa-solid fa-arrow-rotate-left"></i> <span>Yangilash</span></a></p>
-                </div>
-                <div class="notification success">
-                    <p><i class="fa-solid fa-wifi"></i> Internet aloqasi tiklandi </p>
-                </div>
-                <div class="notification warning">
-                    <p>
-                        <span><i class="fa-regular fa-cookie-bite"></i></span>
-                        Eng yaxshi tajriba uchun Cookie fayllardan foydalanishga rozilik bering!
-                        <span id="accept-cookies">
-                            Ruhsat
-                        </span>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="courses starting-block">
-            <div class="section-wrapp">
-                <div class="spec-container">
-                    <div class="course-wrapper">
-                        <div class="course-heading">
-                            <h1 class="block-header section-heading">Kurslar</h1>
-                            <form action="" class="blocky-form">
-                                <input type="text" class="searching-input" placeholder="SAT kurs">
-                                <span class="filter-opener"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M3.48596 18.6941V1.93652C3.48596 1.73122 3.4044 1.53432 3.25923 1.38914C3.11405 1.24397 2.91715 1.16241 2.71184 1.16241C2.50654 1.16241 2.30964 1.24397 2.16446 1.38914C2.01929 1.53432 1.93773 1.73122 1.93773 1.93652V18.6941C1.31406 18.8801 0.778149 19.2843 0.428004 19.8329C0.0778598 20.3815 -0.0631244 21.0378 0.0308319 21.6818C0.124788 22.3257 0.447407 22.9144 0.939694 23.3401C1.43198 23.7657 2.06104 24 2.71184 24C3.36265 24 3.99171 23.7657 4.484 23.3401C4.97628 22.9144 5.2989 22.3257 5.39286 21.6818C5.48681 21.0378 5.34583 20.3815 4.99569 19.8329C4.64554 19.2843 4.10963 18.8801 3.48596 18.6941ZM24 2.71064C24.0002 2.2081 23.8607 1.71541 23.5969 1.28762C23.3332 0.859841 22.9558 0.513828 22.5067 0.288265C22.0576 0.062701 21.5547 -0.0335245 21.0541 0.0103444C20.5534 0.0542133 20.0749 0.236448 19.6719 0.536677C19.2689 0.836907 18.9573 1.2433 18.7721 1.71043C18.5868 2.17756 18.5351 2.68701 18.6227 3.18185C18.7103 3.67668 18.9338 4.1374 19.2683 4.51249C19.6027 4.88758 20.0349 5.16227 20.5165 5.30585V22.0635C20.5165 22.2688 20.598 22.4657 20.7432 22.6109C20.8884 22.756 21.0853 22.8376 21.2906 22.8376C21.4959 22.8376 21.6928 22.756 21.8379 22.6109C21.9831 22.4657 22.0647 22.2688 22.0647 22.0635V5.30585C22.6233 5.13866 23.1132 4.79595 23.4618 4.3285C23.8104 3.86105 23.9991 3.29375 24 2.71064ZM12.7753 9.40478V1.93652C12.7753 1.73122 12.6938 1.53432 12.5486 1.38914C12.4034 1.24397 12.2065 1.16241 12.0012 1.16241C11.7959 1.16241 11.599 1.24397 11.4538 1.38914C11.3087 1.53432 11.2271 1.73122 11.2271 1.93652V9.40478C10.6681 9.57126 10.1777 9.9138 9.82909 10.3814C9.48044 10.849 9.2921 11.4167 9.2921 12C9.2921 12.5833 9.48044 13.151 9.82909 13.6186C10.1777 14.0862 10.6681 14.4287 11.2271 14.5952V22.0635C11.2271 22.2688 11.3087 22.4657 11.4538 22.6109C11.599 22.756 11.7959 22.8376 12.0012 22.8376C12.2065 22.8376 12.4034 22.756 12.5486 22.6109C12.6938 22.4657 12.7753 22.2688 12.7753 22.0635V14.5952C13.3343 14.4287 13.8247 14.0862 14.1733 13.6186C14.522 13.151 14.7103 12.5833 14.7103 12C14.7103 11.4167 14.522 10.849 14.1733 10.3814C13.8247 9.9138 13.3343 9.57126 12.7753 9.40478Z"
-                                            fill="#5667FD" />
-                                    </svg>
-                                </span>
-
-                                <div class="filter-wrapper">
-                                    <div class="filter-heading-wrapper">
-                                        <p class="block-heading">Filter</p>
-                                        <span class="form-closer"><i class="fa-regular fa-xmark-large"></i></span>
-                                    </div>
-                                    <p class="filter-block-heading">Teglar</p>
-                                    <select class="jquery-multiple filter-input" name="states[]" multiple="multiple">
-                                        <option value="english">Ingliz tili</option>
-                                        <option value="russian">Rus tili</option>
-                                        <option value="programming">Dasturlash</option>
-                                        <option value="pure_subjects">Tabiy fanlar</option>
-                                        <option value="sat">SAT</option>
-                                    </select>
-                                    <p class="filter-block-heading">Narxlar</p>
-                                    <div class="filter-costs_wrapper">
-                                        <input type="number" id="staring_cost">
-                                        <input type="number" id="ending_cost">
-                                    </div>
-                                    <div id="slider"></div>
-                                    <div id="range-values"></div>
-
-                                    <p class="filter-block-heading">O'qituvchi</p>
-
-                                    <div class="filter-gender-wrapper">
-                                        <span class="id_male "><i class="fa-regular fa-mars"></i> Erkak</span>
-                                        <span class="id_female "><i class="fa-regular fa-venus"></i> Ayol</span>
-                                        <input type="checkbox" id="id_male">
-                                        <input type="checkbox" id="id_female">
-                                    </div>
-
-                                    <p class="filter-block-heading">Kunlari</p>
-                                    <div class="filter-days-wrapper">
-                                        <span class="id_mon">Du</span>
-                                        <span class="id_tue">Se</span>
-                                        <span class="id_wed">Ch</span>
-                                        <span class="id_thu">Pa</span>
-                                        <span class="id_fri">Ju</span>
-                                        <span class="id_sat red">Sh</span>
-                                        <span class="id_sun red">Ya</span>
-                                        <input type="checkbox" id="id_mon">
-                                        <input type="checkbox" id="id_tue">
-                                        <input type="checkbox" id="id_wed">
-                                        <input type="checkbox" id="id_thu">
-                                        <input type="checkbox" id="id_fri">
-                                        <input type="checkbox" id="id_sat">
-                                        <input type="checkbox" id="id_sun">
-                                    </div>
-
-                                    <span class="form-closer cancel-span">Bekor qilish</span>
-                                    <button class="submit-form">Saralash</button>
-                                </div>
-                            </form>
-                            <input type="text" class="searching-input second" placeholder="SAT kurs">
-                        </div>
-
-                        <div class="course-list">
-                            <a href="./course-detail.html" class="course-item">
-                                <div class="course-item-wrapper">
-                                    <img src="./assets/imgs/edu centers/e-life.png" alt="">
-                                    <div class="course-item-text">
-                                        <h1 class="course-item-title">IELTS kursi</h1>
-                                        <p class="course-item-level">Daraja: Upper-intermediate</p>
-                                        <p class="course-item-days-little">Kunlar: Du-Ch-Sh</p>
-                                    </div>
-                                </div>
-
-                                <div class="course-item-days">
-                                    <div class="course-item-day">
-                                        Du
-                                    </div>
-                                    <div class="course-item-day">
-                                        Ch
-                                    </div>
-                                    <div class="course-item-day">
-                                        Ju
-                                    </div>
-                                    <div class="course-item-time">
-                                        15.30
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="course-item">
-                                <div class="course-item-wrapper">
-                                    <img src="./assets/imgs/edu centers/marstiff.png" alt="">
-                                    <div class="course-item-text">
-                                        <h1 class="course-item-title">SAT kursi</h1>
-                                        <p class="course-item-level">Daraja: 1oy</p>
-                                        <p class="course-item-days-little">Kunlar: Se-Pa-Sh</p>
-                                    </div>
-                                </div>
-
-                                <div class="course-item-days">
-                                    <div class="course-item-day">
-                                        Se
-                                    </div>
-                                    <div class="course-item-day">
-                                        Pa
-                                    </div>
-                                    <div class="course-item-day">
-                                        Sh
-                                    </div>
-                                    <div class="course-item-time">
-                                        13.30
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="course-item">
-                                <div class="course-item-wrapper">
-                                    <img src="./assets/imgs/edu centers/robocode.png" alt="">
-                                    <div class="course-item-text">
-                                        <h1 class="course-item-title">Grafik Dizayn kursi</h1>
-                                        <p class="course-item-level">Daraja: "0"dan</p>
-                                        <p class="course-item-days-little">Kunlar: Har kuni</p>
-                                    </div>
-                                </div>
-                                <div class="course-item-days">
-                                    <div class="course-item-day everyday">
-                                        Har kuni
-                                    </div>
-                                    <div class="course-item-time">
-                                        11.30
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="course-item">
-                                <div class="course-item-wrapper">
-                                    <img src="./assets/imgs/edu centers/wester.png" alt="">
-                                    <div class="course-item-text">
-                                        <h1 class="course-item-title">Back-End kursi</h1>
-                                        <p class="course-item-level">Daraja: Basic python bilishi</p>
-                                        <p class="course-item-days-little">Kunlar: Du-Ch-Ju</p>
-                                    </div>
-                                </div>
-                                <div class="course-item-days">
-                                    <div class="course-item-day">
-                                        Du
-                                    </div>
-                                    <div class="course-item-day">
-                                        Ch
-                                    </div>
-                                    <div class="course-item-day">
-                                        Ju
-                                    </div>
-                                    <div class="course-item-time">
-                                        15.30
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="course-item">
-                                <div class="course-item-wrapper">
-                                    <img src="./assets/imgs/edu centers/globus.png" alt="">
-                                    <div class="course-item-text">
-                                        <h1 class="course-item-title">Matematika kursi</h1>
-                                        <p class="course-item-level">Daraja: 5-sinf</p>
-                                        <p class="course-item-days-little">Kunlar: Du-Ch-Ju</p>
-                                    </div>
-                                </div>
-                                <div class="course-item-days">
-                                    <div class="course-item-day">
-                                        Du
-                                    </div>
-                                    <div class="course-item-day">
-                                        Ch
-                                    </div>
-                                    <div class="course-item-day">
-                                        Ju
-                                    </div>
-                                    <div class="course-item-time">
-                                        15.30
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="course-item">
-                                <div class="course-item-wrapper">
-                                    <img src="./assets/imgs/edu centers/proper.png" alt="">
-                                    <div class="course-item-text">
-                                        <h1 class="course-item-title">General English kursi</h1>
-                                        <p class="course-item-level">Daraja: Beginner</p>
-                                        <p class="course-item-days-little">
-                                            Kunlar: Se-Pa-Sh</p>
-                                    </div>
-                                </div>
-                                <div class="course-item-days">
-                                    <div class="course-item-day">
-                                        Se
-                                    </div>
-                                    <div class="course-item-day">
-                                        Pa
-                                    </div>
-                                    <div class="course-item-day">
-                                        Sh
-                                    </div>
-                                    <div class="course-item-time">
-                                        15.30
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="course-item">
-                                <div class="course-item-wrapper">
-                                    <img src="./assets/imgs/edu centers/registan.png" alt="">
-                                    <div class="course-item-text">
-                                        <h1 class="course-item-title">IELTS kursi</h1>
-                                        <p class="course-item-level">Daraja: Intermediate</p>
-                                        <p class="course-item-days-little">
-                                            Kunlar: Har kuni</p>
-                                    </div>
-                                </div>
-                                <div class="course-item-days">
-                                    <div class="course-item-day everyday">
-                                        Har kuni
-                                    </div>
-                                    <div class="course-item-time">
-                                        9.30
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="course-item">
-                                <div class="course-item-wrapper">
-                                    <img src="./assets/imgs/edu centers/texnopark.png" alt="">
-                                    <div class="course-item-text">
-                                        <h1 class="course-item-title">UI/UX kursi</h1>
-                                        <p class="course-item-level">Daraja: "0"dan</p>
-                                        <p class="course-item-days-little">
-                                            Kunlar: Har kuni</p>
-                                    </div>
-                                </div>
-                                <div class="course-item-days">
-                                    <div class="course-item-day everyday">
-                                        Har kuni
-                                    </div>
-                                    <div class="course-item-day intensive">
-                                        Intensiv
-                                        <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f525/512.webp" alt="">
-                                    </div>
-                                    <div class="course-item-time">
-                                        15.30
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Libs -->
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <!-- <script src="./assets/lib/js/smooth-scroll.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.8.1/nouislider.min.js"></script>
-
-    <!-- Local -->
-    <script src="./assets/local/js/swiper.conf.js"></script>
-    <script src="./assets/js/main.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.jquery-multiple').select2();
-        });
-        var slider = document.getElementById('slider');
-        const starting = document.querySelector("#staring_cost");
-        const ending = document.querySelector("#ending_cost");
-
-        noUiSlider.create(slider, {
-            start: [0, 1000000],
-            connect: true,
-            range: {
-                'min': 0,
-                'max': 1000000
-            },
-            step: 50000,
-            format: {
-                to: function (value) {
-                    return Math.round(value);
-                },
-                from: function (value) {
-                    return Number(value);
-                }
-            }
-        });
-
-        function updateSliderFromInputs() {
-            let startValue = parseInt(starting.value);
-            let endValue = parseInt(ending.value);
-            if (startValue < 0) startValue = 0;
-            if (endValue > 5000000) endValue = 5000000;
-            if (startValue > endValue) startValue = endValue;
-            slider.noUiSlider.set([startValue, endValue]);
+{% block scripts %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('.jquery-multiple').select2()
+    })
+    var slider = document.getElementById('slider')
+    const starting = document.querySelector('#staring_cost')
+    const ending = document.querySelector('#ending_cost')
+    
+    noUiSlider.create(slider, {
+      start: [0, 1000000],
+      connect: true,
+      range: {
+        min: 0,
+        max: 1000000
+      },
+      step: 50000,
+      format: {
+        to: function (value) {
+          return Math.round(value)
+        },
+        from: function (value) {
+          return Number(value)
         }
-
-        slider.noUiSlider.on('update', function (values) {
-            starting.value = values[0];
-            ending.value = values[1];
-        });
-        starting.addEventListener('change', updateSliderFromInputs);
-        ending.addEventListener('change', updateSliderFromInputs);
-    </script>
-</body>
-
-</html>
+      }
+    })
+    
+    function updateSliderFromInputs() {
+      let startValue = parseInt(starting.value)
+      let endValue = parseInt(ending.value)
+      if (startValue < 0) startValue = 0
+      if (endValue > 5000000) endValue = 5000000
+      if (startValue > endValue) startValue = endValue
+      slider.noUiSlider.set([startValue, endValue])
+    }
+    
+    slider.noUiSlider.on('update', function (values) {
+      starting.value = values[0]
+      ending.value = values[1]
+    })
+    starting.addEventListener('change', updateSliderFromInputs)
+    ending.addEventListener('change', updateSliderFromInputs)
+  </script>
+{% endblock %}

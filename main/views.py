@@ -45,3 +45,31 @@ class CategoryView(ListView):
 
         context['events'] = Events.objects.all()
         return context
+    
+
+class CourseView(ListView):
+    model = Course
+    template_name = 'courses.html'
+    context_object_name = 'courses'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['edu_centers'] = EduCenter.objects.all()
+
+        context['events'] = Events.objects.all()
+
+        return context
+    
+
+class CompaniesView(ListView):
+    model = EduCenter
+    template_name = 'companies.html'
+    context_object_name = 'edu_centers'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['events'] = Events.objects.all()
+
+        return context
