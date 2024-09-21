@@ -125,29 +125,19 @@ class CourseView(ListView):
         max_price = self.request.GET.get('max_price', None)
         gender = self.request.GET.get('gender', None)
         days = self.request.GET.getlist('days')
-
-        # Check if any filter is applied
         filter_applied = any([categories, min_price, max_price, gender, days])
 
         if filter_applied:
-            # Step 1: Filter by Category (optional)
             if categories:
                 queryset = queryset.filter(category__id__in=categories)
-
-            # Step 2: Filter by Price (optional)
             if min_price or max_price:
                 if min_price:
                     queryset = queryset.filter(price__gte=min_price)
                 if max_price:
                     queryset = queryset.filter(price__lte=max_price)
-
-            # Step 3: Filter by Teacher Gender (optional)
             if gender:
                 gender_ids = Gender.objects.filter(name=gender).values_list('id', flat=True)
                 queryset = queryset.filter(teacher__gender__id__in=gender_ids)
-
-
-            # Step 4: Filter by Days (optional)
             if days:
                 queryset = queryset.filter(days__name__in=days).distinct()
 
@@ -191,4 +181,28 @@ class CompaniesView(ListView):
         context['events'] = Events.objects.all()
 
         return context
+    
+
+
+def search_edu_centers(request):
+    query = request.GET.get('q', '')
+    centers_data = []
+
+    if query:
+        centers = EduCenter.objects.filter(
+            Q(name__icontains=query) | 
+            Q(location__icontains=query)
+        ).distinct()
+
+        for center in centers:
+            centers_data.append({
+                'name': center.name,
+                'logo': request.build_absolute_uri(center.logo.url) if center.logo else '',
+                'edu_type': center.edu_type.name if center.edu_type else '',  # Extract the name of edu_type
+                'location': center.location,
+                'verify': center.verify,
+                'partner': center.partner,
+            })
+
+    return JsonResponse({'centers': centers_data})
     

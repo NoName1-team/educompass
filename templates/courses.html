@@ -186,6 +186,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+// others
+
     $(document).ready(function () {
       $('.jquery-multiple').select2()
     })
@@ -226,71 +229,5 @@ document.addEventListener('DOMContentLoaded', function () {
     })
     starting.addEventListener('change', updateSliderFromInputs)
     ending.addEventListener('change', updateSliderFromInputs)
-
- 
-
-
-
-{% comment %} for filter {% endcomment %}
-
-document.addEventListener('DOMContentLoaded', function () {
-    const filterForm = document.querySelector('.filter-form-second');
-    const resultsContainer = document.querySelector('.course-list');
-
-    filterForm.addEventListener('submit', function (e) {
-        e.preventDefault(); // Prevent the default form submission
-
-        const categories = Array.from(document.querySelectorAll('select[name="categories[]"] option:checked')).map(opt => opt.value);
-        const min_price = document.getElementById('starting_cost').value || 0;
-        const max_price = document.getElementById('ending_cost').value || 1000000;
-        const gender = document.querySelector('input[name="gender"]:checked') ? document.querySelector('input[name="gender"]:checked').value : '';
-        const days = Array.from(document.querySelectorAll('input[name="days"]:checked')).map(day => day.value);
-
-        // AJAX request to filter courses
-        fetch(`/filter-courses-ajax/?categories=${categories}&min_price=${min_price}&max_price=${max_price}&gender=${gender}&days=${days}`, {
-            method: 'GET',
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            resultsContainer.innerHTML = ''; // Clear previous results
-            if (data.courses.length > 0) {
-                let resultsHtml = '';
-                data.courses.forEach(course => {
-                    resultsHtml += `
-                        <a href="#" class="course-item">
-                            <div class="course-item-wrapper">
-                                <img src="${course.edu_center_logo}" alt="${course.name} logo" />
-                                <div class="course-item-text">
-                                    <h1 class="course-item-title">${course.name}</h1>
-                                    <p class="course-item-level">${course.level_name}</p>
-                                    <p class="course-item-days-little">${course.days_html}</p>
-                                </div>
-                            </div>
-                            <div class="course-item-days">
-                                ${course.days_html}
-                                ${course.intensive_html}
-                                <div class="course-item-time">${course.start_time}</div>
-                            </div>
-                        </a>
-                    `;
-                });
-                resultsContainer.innerHTML = resultsHtml;
-            } else {
-                resultsContainer.innerHTML = '<p>No courses found.</p>';
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching filtered courses:', error);
-            resultsContainer.innerHTML = '<p>Error fetching data</p>';
-        });
-    });
-});
-
-
-
-
   </script>
 {% endblock %}
