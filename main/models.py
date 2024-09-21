@@ -14,7 +14,6 @@ class Level(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
-    levels = models.ManyToManyField(Level)
     icon_class = models.CharField(max_length=255, null=True, default='fa-regular fa-sparkles', help_text="Font Awesome icon class, e.g., 'fa-calculator-simple'")
 
     def __str__(self):
