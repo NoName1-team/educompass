@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="EduCompass - Bosh sahifa">
+    <meta name="description"
+        content="EduCompass - O'qish uchun eng yaxshi kurslarni topish va tanlash uchun ishonchli platforma. Biz sizga turli o'quv markazlarida mavjud kurslarni qidirish, solishtirish va ro'yxatdan o'tish imkoniyatini taqdim etamiz. Bizning maqsadimiz sizning ta'lim ehtiyojlaringizni qondirishda yordam berishdir.">
+    <meta name="keywords"
+        content="ta'lim, o'quv markazlari, kurslar, ta'lim xizmatlari, EduCompass, o'qish, darslar, kurs qidirish, ta'lim resurslari">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="EduCompass">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://educompass.uz/">
+    <meta property="og:title" content="EduCompass - Bosh sahifa">
+    <meta property="og:description"
+        content="EduCompass - O'qish uchun eng yaxshi kurslarni topish va tanlash uchun ishonchli platforma. Biz sizga turli o'quv markazlarida mavjud kurslarni qidirish, solishtirish va ro'yxatdan o'tish imkoniyatini taqdim etamiz. Bizning maqsadimiz sizning ta'lim ehtiyojlaringizni qondirishda yordam berishdir.">
+    <meta property="og:image" content="https://educompass-front-end.netlify.app/assets/imgs/logo-icon.svg">
+    <link rel="icon" type="image/x-icon" href="https://educompass-front-end.netlify.app/assets/imgs/logo-icon.svg">
+    <meta property="og:locale" content="uz_UZ">
+    <meta property="og:site_name" content="EduCompass">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://educompass.uz/">
+    <meta property="twitter:title" content="EduCompass - Bosh sahifa">
+    <meta property="twitter:description"
+        content="EduCompass - O'qish uchun eng yaxshi kurslarni topish va tanlash uchun ishonchli platforma.">
+    <meta property="twitter:image" content="https://educompass-front-end.netlify.app/assets/imgs/logo-icon.svg">
+    <meta property="twitter:site" content="@EduCompass">
+    <meta property="twitter:creator" content="@EduCompass">
+
+    <!-- Libs -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/all.css">
+
+    <!-- Local -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/responsive.css">
+    <title>EduCompass - Bosh sahifa</title>
+</head>
+
+<body>
+    <header class="entry-header">
+        <a href="#">
+            <img src="./assets/imgs/logo.svg" alt="">
+        </a>
+    </header>
+
+
+    <main>
+        <div class="entry">
+            <div class="section-wrapp">
+                <div class="initial-container">
+                    <h1 class="entry-heading">Yo’nalishlarni tanlang</h1>
+
+                    <select id="categorySelect" multiple>
+                        <option value="dasturlash">Dasturlash</option>
+                        <option value="matematika">Matematika</option>
+                        <option value="fizika">Fizika</option>
+                        <option value="kimyo">Kimyo</option>
+                    </select>
+                    <div class="cat-list entry">
+                        <div class="cat-item" data-key-id="dasturlash">
+                            <div class="cat-item_wrapper">
+                                <div class="cat-item-icon">
+                                    <i class="fa-regular fa-calculator-simple"></i>
+                                </div>
+                                <div class="cat-item-texts">
+                                    <p>SAT</p>
+                                    <span>15ta o'quv markaz</span>
+                                </div>
+                            </div>
+                            <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f525/512.webp" alt="">
+                            <div class="cat-item-selection-wrapper">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                        </div>
+                        <div class="cat-item" data-key-id="matematika">
+                            <div class="cat-item_wrapper">
+                                <div class="cat-item-icon">
+                                    <i class="fa-regular fa-rectangle-terminal"></i>
+                                </div>
+                                <div class="cat-item-texts">
+                                    <p>Dasturlash</p>
+                                    <span>25ta o'quv markaz</span>
+                                </div>
+                            </div>
+                            <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f525/512.webp" alt="">
+                            <div class="cat-item-selection-wrapper">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                        </div>
+                        <div class="cat-item" data-key-id="matematika">
+                            <div class="cat-item_wrapper">
+                                <div class="cat-item-icon">
+                                    <!-- <i class="fa-brands fa-bluesky"></i> -->
+                                    <i class="fa-regular fa-share-nodes"></i>
+                                </div>
+                                <div class="cat-item-texts">
+                                    <p>SMM</p>
+                                    <span>17ta o'quv markaz</span>
+                                </div>
+                            </div>
+                            <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f525/512.webp" alt="">
+                            <div class="cat-item-selection-wrapper">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                        </div>
+                        <div class="cat-item">
+                            <div class="cat-item_wrapper">
+                                <div class="cat-item-icon">
+                                    <i class="fa-regular fa-pen-paintbrush"></i>
+                                </div>
+                                <div class="cat-item-texts">
+                                    <p>Grafik Dizayn</p>
+                                    <span>5ta o'quv markaz</span>
+                                </div>
+                            </div>
+                            <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f525/512.webp" alt="">
+                            <div class="cat-item-selection-wrapper">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                        </div>
+                        <div class="cat-item">
+                            <div class="cat-item_wrapper">
+                                <div class="cat-item-icon">
+                                    <i class="fa-regular fa-language"></i>
+                                </div>
+                                <div class="cat-item-texts">
+                                    <p>Ingliz tili</p>
+                                    <span>35ta o'quv markaz</span>
+                                </div>
+                            </div>
+                            <div class="cat-item-selection-wrapper">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                        </div>
+                        <div class="cat-item">
+                            <div class="cat-item_wrapper">
+                                <div class="cat-item-icon">
+                                    <i class="fa-regular fa-shapes"></i>
+                                </div>
+                                <div class="cat-item-texts">
+                                    <p>3D modelling</p>
+                                    <span>20ta o'quv markaz</span>
+                                </div>
+                            </div>
+                            <div class="cat-item-selection-wrapper">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                        </div>
+                        <div class="cat-item">
+                            <div class="cat-item_wrapper">
+                                <div class="cat-item-icon">
+                                    <i class="fa-regular fa-language"></i>
+                                </div>
+                                <div class="cat-item-texts">
+                                    <p>IELTS</p>
+                                    <span>33ta o'quv markaz</span>
+                                </div>
+                            </div>
+                            <div class="cat-item-selection-wrapper">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                        </div>
+                        <div class="cat-item">
+                            <div class="cat-item_wrapper">
+                                <div class="cat-item-icon">
+                                    <i class="fa-regular fa-calculator"></i>
+                                </div>
+                                <div class="cat-item-texts">
+                                    <p>Matematika</p>
+                                    <span>14ta o'quv markaz</span>
+                                </div>
+                            </div>
+                            <div class="cat-item-selection-wrapper">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                        </div>
+                        <div class="cat-item">
+                            <div class="cat-item_wrapper">
+                                <div class="cat-item-icon">
+                                    <i class="fa-regular fa-robot"></i>
+                                </div>
+                                <div class="cat-item-texts">
+                                    <p>Robototexnika</p>
+                                    <span>17ta o'quv markaz</span>
+                                </div>
+                            </div>
+                            <div class="cat-item-selection-wrapper">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                        </div>
+                        <div class="cat-item">
+                            <div class="cat-item_wrapper">
+                                <div class="cat-item-icon">
+                                    <i class="fa-regular fa-flask"></i>
+                                </div>
+                                <div class="cat-item-texts">
+                                    <p>Kimyo</p>
+                                    <span>17ta o'quv markaz</span>
+                                </div>
+                            </div>
+                            <div class="cat-item-selection-wrapper">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                        </div>
+                        <div class="cat-item">
+                            <div class="cat-item_wrapper">
+                                <div class="cat-item-icon">
+                                    <i class="fa-regular fa-gamepad-modern"></i>
+                                </div>
+                                <div class="cat-item-texts">
+                                    <p>Oyin yaratish</p>
+                                    <span>17ta o'quv markaz</span>
+                                </div>
+                            </div>
+                            <div class="cat-item-selection-wrapper">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                        </div>
+                        <div class="cat-item">
+                            <div class="cat-item_wrapper">
+                                <div class="cat-item-icon">
+                                    <i class="fa-regular fa-file-invoice"></i>
+                                </div>
+                                <div class="cat-item-texts">
+                                    <p>Tarix</p>
+                                    <span>17ta o'quv markaz</span>
+                                </div>
+                            </div>
+                            <div class="cat-item-selection-wrapper">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                        </div>
+                        <div class="cat-item">
+                            <div class="cat-item_wrapper">
+                                <div class="cat-item-icon">
+                                    <i class="fa-regular fa-calculator"></i>
+                                </div>
+                                <div class="cat-item-texts">
+                                    <p>Matematika</p>
+                                    <span>14ta o'quv markaz</span>
+                                </div>
+                            </div>
+                            <div class="cat-item-selection-wrapper">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                        </div>
+                        <div class="cat-item">
+                            <div class="cat-item_wrapper">
+                                <div class="cat-item-icon">
+                                    <i class="fa-regular fa-robot"></i>
+                                </div>
+                                <div class="cat-item-texts">
+                                    <p>Robototexnika</p>
+                                    <span>17ta o'quv markaz</span>
+                                </div>
+                            </div>
+                            <div class="cat-item-selection-wrapper">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                        </div>
+                        <div class="cat-item">
+                            <div class="cat-item_wrapper">
+                                <div class="cat-item-icon">
+                                    <i class="fa-regular fa-flask"></i>
+                                </div>
+                                <div class="cat-item-texts">
+                                    <p>Kimyo</p>
+                                    <span>17ta o'quv markaz</span>
+                                </div>
+                            </div>
+                            <div class="cat-item-selection-wrapper">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                        </div>
+                        <div class="cat-item">
+                            <div class="cat-item_wrapper">
+                                <div class="cat-item-icon">
+                                    <i class="fa-regular fa-gamepad-modern"></i>
+                                </div>
+                                <div class="cat-item-texts">
+                                    <p>Oyin yaratish</p>
+                                    <span>17ta o'quv markaz</span>
+                                </div>
+                            </div>
+                            <div class="cat-item-selection-wrapper">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                        </div>
+                        <div class="cat-item">
+                            <div class="cat-item_wrapper">
+                                <div class="cat-item-icon">
+                                    <i class="fa-regular fa-file-invoice"></i>
+                                </div>
+                                <div class="cat-item-texts">
+                                    <p>Tarix</p>
+                                    <span>17ta o'quv markaz</span>
+                                </div>
+                            </div>
+                            <div class="cat-item-selection-wrapper">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-pattern"></div>
+        </div>
+    </main>
+
+    <!-- Local -->
+    <script>
+        document.querySelectorAll('.cat-item').forEach(function (item) {
+            item.addEventListener('click', function () {
+                const keyId = item.getAttribute('data-key-id');
+                item.classList.toggle('selected');
+                const selectElement = document.getElementById('categorySelect');
+                const options = selectElement.options;
+                for (let i = 0; i < options.length; i++) {
+                    if (options[i].value === keyId) {
+                        options[i].selected = !options[i].selected;
+                    }
+                }
+            });
+        })
+    </script>
+</body>
+
+</html>
