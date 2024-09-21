@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<body>
+    <main>
+        <div class="ed-centers">
+            <div class="section-wrapp">
+                <div class="spec-container">
+                    <a href="" class="section-heading">O'quv markazlar <i
+                            class="fa-regular fa-arrow-right"></i></a>
+                    <div class="ed-centers_wrapper">
+                        <div class="ed-centers-list">
+                            {% for center in edu_centers %}
+                             <a href="" class="ed-center-item">
+                                <img src="{{center.logo.url}}" alt="">
+                                <p class="ed-center-name">{{center.name}}
+                                    {% if center.partner %}
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M10.7499 2.44982C11.4399 1.85982 12.5699 1.85982 13.2699 2.44982L14.8499 3.80982C15.1499 4.06982 15.7099 4.27982 16.1099 4.27982H17.8099C18.8699 4.27982 19.7399 5.14982 19.7399 6.20982V7.90982C19.7399 8.29982 19.9499 8.86982 20.2099 9.16982L21.5699 10.7498C22.1599 11.4398 22.1599 12.5698 21.5699 13.2698L20.2099 14.8498C19.9499 15.1498 19.7399 15.7098 19.7399 16.1098V17.8098C19.7399 18.8698 18.8699 19.7398 17.8099 19.7398H16.1099C15.7199 19.7398 15.1499 19.9498 14.8499 20.2098L13.2699 21.5698C12.5799 22.1598 11.4499 22.1598 10.7499 21.5698L9.16988 20.2098C8.86988 19.9498 8.30988 19.7398 7.90988 19.7398H6.17988C5.11988 19.7398 4.24988 18.8698 4.24988 17.8098V16.0998C4.24988 15.7098 4.03988 15.1498 3.78988 14.8498L2.43988 13.2598C1.85988 12.5698 1.85988 11.4498 2.43988 10.7598L3.78988 9.16982C4.03988 8.86982 4.24988 8.30982 4.24988 7.91982V6.19982C4.24988 5.13982 5.11988 4.26982 6.17988 4.26982H7.90988C8.29988 4.26982 8.86988 4.05982 9.16988 3.79982L10.7499 2.44982Z" fill="#FFD700" stroke="#FFD700" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M8.37988 12.0001L10.7899 14.4201L15.6199 9.58008" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                    {% elif center.verify %}
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M10.7499 2.44982C11.4399 1.85982 12.5699 1.85982 13.2699 2.44982L14.8499 3.80982C15.1499 4.06982 15.7099 4.27982 16.1099 4.27982H17.8099C18.8699 4.27982 19.7399 5.14982 19.7399 6.20982V7.90982C19.7399 8.29982 19.9499 8.86982 20.2099 9.16982L21.5699 10.7498C22.1599 11.4398 22.1599 12.5698 21.5699 13.2698L20.2099 14.8498C19.9499 15.1498 19.7399 15.7098 19.7399 16.1098V17.8098C19.7399 18.8698 18.8699 19.7398 17.8099 19.7398H16.1099C15.7199 19.7398 15.1499 19.9498 14.8499 20.2098L13.2699 21.5698C12.5799 22.1598 11.4499 22.1598 10.7499 21.5698L9.16988 20.2098C8.86988 19.9498 8.30988 19.7398 7.90988 19.7398H6.17988C5.11988 19.7398 4.24988 18.8698 4.24988 17.8098V16.0998C4.24988 15.7098 4.03988 15.1498 3.78988 14.8498L2.43988 13.2598C1.85988 12.5698 1.85988 11.4498 2.43988 10.7598L3.78988 9.16982C4.03988 8.86982 4.24988 8.30982 4.24988 7.91982V6.19982C4.24988 5.13982 5.11988 4.26982 6.17988 4.26982H7.90988C8.29988 4.26982 8.86988 4.05982 9.16988 3.79982L10.7499 2.44982Z"
+                                            fill="#ED1B24" stroke="#CF0F17" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round"></path>
+                                        <path d="M8.37988 12.0001L10.7899 14.4201L15.6199 9.58008" stroke="#FFF"
+                                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                    {% endif %}
+                                </p>
+                                <span class="ed-center-position">Language Center</span>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="categories">
+            <div class="section-wrapp">
+                <div class="spec-container">
+                    <div class="cat-wrapper">
+                        <a href="./categories.html" class="section-heading">Kategoriyalar <i
+                                class="fa-regular fa-arrow-right"></i></a>
+                        <div class="cat-list">
+                            {% for category in categories  %}
+                            <a href="" class="cat-item">
+                                <div class="cat-item_wrapper">
+                                    <div class="cat-item-icon">
+                                        <i class="{{ category.icon_class }}"></i>
+                                    </div>
+                                    <div class="cat-item-texts">
+                                        <p>{{ category.name }}</p>
+                                        <span>{{ category.edu_centers.count }}ta o'quv markaz</span>
+                                    </div>
+                                </div>
+
+                                <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f525/512.webp" alt="">
+                            </a>
+                            {% endfor %}
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="courses main">
+            <div class="section-wrapp">
+                <div class="spec-container">
+                    <div class="course-wrapper">
+                        {% comment %} User modeli yaratilgandan so'ng to'p 10 talik kurslar chiqarilishi kerak {% endcomment %}
+                        <a href="" class="section-heading">Mashhur kurslar <i
+                                class="fa-regular fa-arrow-right"></i></a>
+                        <div class="course-list">
+                            {% for course in courses %}
+                            <a href="" class="course-item">
+                                <div class="course-item-wrapper">
+                                    <img src="{{ course.edu_center.logo.url }}" alt="">
+                                    <div class="course-item-text">
+                                        <h1 class="course-item-title">{{course.name}}</h1>
+                                        <p class="course-item-level">{{ course.level.name }}</p>
+                                        <p class="course-item-days-little">{% for day in course.days.all %}
+                                                                                {{ day.name }}{% if not forloop.last %}, {% endif %}
+                                                                            {% endfor %}</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="course-item-days">
+                                    {% for day in course.days.all %}
+                                        <div class="course-item-day {% if day.name == "Har kuni" %} everyday {% endif %}">{{ day.name }}</div>
+                                    {% endfor %}
+                                    {% if course.intensive == True %}
+                                    <div class="course-item-day intensive">
+                                        Intensiv
+                                        <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f525/512.webp" alt="">
+                                    </div>
+                                    {% endif %}
+                                    <div class="course-item-time">{{ course.start_time|date:"H:i" }}</div>
+                                </div>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock content %}
