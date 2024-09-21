@@ -1,0 +1,70 @@
+{% load static %}
+
+<title>
+  {% block content %}
+    EduCompass - Tests
+  {% endblock %}
+</title>
+
+{% block header %}
+  <header class="entry-header">
+    <a href="#"><img src="{% static './assets/imgs/logo.svg' %}" alt="" /></a>
+  </header>
+{% endblock %}
+
+{% block content %}
+  <main>
+    <div class="test">
+      <div class="section-wrapp">
+        <div class="initial-container">
+          <div class="test-wrapper">
+            <div class="quiz-container">
+              <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+                <span id="timer" class="timer">15:00</span>
+              </div>
+
+              <div class="question-container">
+                <h2>(1/15) Was it Bobur ___ Boburnoma?</h2>
+              </div>
+
+              <div class="options-container">
+                <button class="option">who wrote</button>
+                <button class="option">who wrote</button>
+                <button class="option">who wrote</button>
+                <button class="option">who wrote</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}
+
+{% block scripts %}
+  <!-- Local -->
+  <script>
+    let totalTime = 15 * 60
+    let timeRemaining = totalTime
+    
+    const timerElement = document.getElementById('timer')
+    const progressBarElement = document.getElementById('progress-bar')
+    
+    function updateTimer() {
+      const minutes = Math.floor(timeRemaining / 60)
+      const seconds = timeRemaining % 60
+      timerElement.innerHTML = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`
+      progressPercentage = (timeRemaining / totalTime) * 100
+      progressBarElement.style.width = progressPercentage + '%'
+      if (timeRemaining > 0) {
+        timeRemaining--
+      } else {
+        clearInterval(timerInterval)
+        alert('Vaqt tugadi!')
+      }
+    }
+    
+    const timerInterval = setInterval(updateTimer, 1000)
+  </script>
+{% endblock %}
