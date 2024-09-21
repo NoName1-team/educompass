@@ -1,0 +1,88 @@
+@media screen and (max-width:1600px) {
+    .course-item {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:1300px) {
+    .course-item {
+        width: calc(50% - 5px);
+    }
+
+    .company-item {
+        width: calc(33% - 7.5px);
+    }
+}
+
+@media screen and (max-width:1200px) {
+    .course-item {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:900px) {
+    .cat-item {
+        width: calc(50% - 5px);
+    }
+
+    .company-item {
+        width: calc(50% - 5px);
+    }
+}
+
+@media screen and (max-width:800px) {
+    .company-item {
+        width: calc(33% - 5px);
+    }
+}
+
+@media screen and (max-width:600px) {
+    .company-item {
+        width: calc(50% - 5px);
+    }
+
+    .event-item img {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .cat-item {
+        width: 100%;
+    }
+
+    .course-item-days-little {
+        font-size: 12px;
+        color: var(--color-dark);
+        display: block;
+    }
+}
+
+@media screen and (max-width:400px) {
+    .searching-rec-wrapper img {
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+    }
+
+    .searching-company-name {
+        font-size: 14px;
+        align-items: center;
+    }
+
+    .searching-rec-text-wrapper span {
+        font-size: 12px;
+    }
+
+    .searching-rec-rating svg {
+        width: 16px !important;
+        height: 16px !important;
+        font-size: 12px;
+    }
+
+    .searching-rec-rating {
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+    }
+}
