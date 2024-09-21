@@ -13,5 +13,6 @@ urlpatterns = [
     path('courses/', CourseView.as_view(), name='courses'),
     path('companies/', CompaniesView.as_view(), name='companies'),
     path('search/', views.ajax_search, name='ajax_search'),
-    path('search-course/', search_courses, name='search_courses'),
+    path('search-course/', views.search_courses, name='ajax_search'),
+    
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

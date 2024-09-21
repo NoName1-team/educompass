@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.generic import ListView
 from django.db.models import Count, Q
-from .models import EduCenter, Course, Category, Events, Day, Teacher
+from .models import EduCenter, Course, Category, Events, Day, Teacher, Gender
 
 
 
@@ -108,7 +108,6 @@ class CourseView(ListView):
         context['days'] = Day.objects.all()
         context['teachers'] = Teacher.objects.all()
 
-        # Add the current GET parameters to context to preserve form inputs
         context['selected_categories'] = self.request.GET.getlist('categories')
         context['min_price'] = self.request.GET.get('min_price', '')
         context['max_price'] = self.request.GET.get('max_price', '')
@@ -116,28 +115,44 @@ class CourseView(ListView):
         context['selected_days'] = self.request.GET.getlist('days')
 
         return context
-
+    
     def get_queryset(self):
         queryset = Course.objects.all()
+
+        # Get filter parameters from GET request
         categories = self.request.GET.getlist('categories')
-        min_price = self.request.GET.get('min_price', 0)
-        max_price = self.request.GET.get('max_price', 1000000)
+        min_price = self.request.GET.get('min_price', None)
+        max_price = self.request.GET.get('max_price', None)
         gender = self.request.GET.get('gender', None)
         days = self.request.GET.getlist('days')
-        if categories:
-            queryset = queryset.filter(category__id__in=categories)
 
-        # Step 2: Filter by Price
-        queryset = queryset.filter(price__gte=min_price, price__lte=max_price)
+        # Check if any filter is applied
+        filter_applied = any([categories, min_price, max_price, gender, days])
 
-        # Step 3: Filter by Teacher Gender
-        if gender:
-            queryset = queryset.filter(teacher__gender__iexact=gender)
-        if days:
-            queryset = queryset.filter(days__name__in=days)
-        queryset = queryset.distinct()
+        if filter_applied:
+            # Step 1: Filter by Category (optional)
+            if categories:
+                queryset = queryset.filter(category__id__in=categories)
+
+            # Step 2: Filter by Price (optional)
+            if min_price or max_price:
+                if min_price:
+                    queryset = queryset.filter(price__gte=min_price)
+                if max_price:
+                    queryset = queryset.filter(price__lte=max_price)
+
+            # Step 3: Filter by Teacher Gender (optional)
+            if gender:
+                gender_ids = Gender.objects.filter(name=gender).values_list('id', flat=True)
+                queryset = queryset.filter(teacher__gender__id__in=gender_ids)
+
+
+            # Step 4: Filter by Days (optional)
+            if days:
+                queryset = queryset.filter(days__name__in=days).distinct()
 
         return queryset
+
 
 
     

@@ -22,94 +22,97 @@
                   </svg>
                 </span>
               </form>
-              <form action="" class="filter-form-second">
-                <div class="filter-wrapper">
-                  <div class="filter-heading-wrapper">
-                    <p class="block-heading">Filter</p>
-                    <span class="form-closer"><i class="fa-regular fa-xmark-large"></i></span>
-                  </div>
-                  <p class="filter-block-heading">Teglar</p>
-                  <select class="jquery-multiple filter-input" name="states[]" multiple="multiple">
-                    <option value="english">Ingliz tili</option>
-                    <option value="russian">Rus tili</option>
-                    <option value="programming">Dasturlash</option>
-                    <option value="pure_subjects">Tabiy fanlar</option>
-                    <option value="sat">SAT</option>
-                  </select>
-                  <p class="filter-block-heading">Narxlar</p>
-                  <div class="filter-costs_wrapper">
-                    <input type="number" id="staring_cost" />
-                    <input type="number" id="ending_cost" />
-                  </div>
-                  <div id="slider"></div>
-                  <div id="range-values"></div>
+<form action="" method="get" class="filter-form-second">
+    <div class="filter-wrapper">
+        <div class="filter-heading-wrapper">
+            <p class="block-heading">Filter</p>
+            <span class="form-closer"><i class="fa-regular fa-xmark-large"></i></span>
+        </div>
 
-                  <p class="filter-block-heading">O'qituvchi</p>
+        <!-- Category Filter -->
+        <p class="filter-block-heading">Teglar</p>
+        <select id="categories" class="jquery-multiple filter-input" name="categories" multiple="multiple">
+            {% for category in categories %}
+                <option value="{{ category.id }}" {% if category.id|stringformat:"s" in selected_categories %}selected{% endif %}>
+                    {{ category.name }}
+                </option>
+            {% endfor %}
+        </select>
 
-                  <div class="filter-gender-wrapper">
-                    <span class="id_male"><i class="fa-regular fa-mars"></i> Erkak</span>
-                    <span class="id_female"><i class="fa-regular fa-venus"></i> Ayol</span>
-                    <input type="checkbox" id="id_male" />
-                    <input type="checkbox" id="id_female" />
-                  </div>
+        <!-- Price Filter -->
+        <p class="filter-block-heading">Narxlar</p>
+        <div class="filter-costs_wrapper">
+            <input type="number" id="staring_cost" name="min_price" value="{{ min_price }}" placeholder="Min price" />
+            <input type="number" id="ending_cost" name="max_price" value="{{ max_price }}" placeholder="Max price" />
+        </div>
 
-                  <p class="filter-block-heading">Kunlari</p>
-                  <div class="filter-days-wrapper">
-                    <span class="id_mon">Du</span>
-                    <span class="id_tue">Se</span>
-                    <span class="id_wed">Ch</span>
-                    <span class="id_thu">Pa</span>
-                    <span class="id_fri">Ju</span>
-                    <span class="id_sat red">Sh</span>
-                    <span class="id_sun red">Ya</span>
-                    <input type="checkbox" id="id_mon" />
-                    <input type="checkbox" id="id_tue" />
-                    <input type="checkbox" id="id_wed" />
-                    <input type="checkbox" id="id_thu" />
-                    <input type="checkbox" id="id_fri" />
-                    <input type="checkbox" id="id_sat" />
-                    <input type="checkbox" id="id_sun" />
-                  </div>
+        <!-- Teacher Filter (Gender) -->
+        <p class="filter-block-heading">O'qituvchi</p>
+        <div class="filter-gender-wrapper">
+            {% for teacher in teachers %}
+                <span class="id_{{ teacher.gender }}">
+                    <input type="radio" name="gender" value="{{ teacher.gender }}" id="id_{{ teacher.gender }}"
+                        {% if teacher.gender == selected_gender %}checked{% endif %} />
+                    <i class="fa-regular fa-{% if teacher.gender == 'Erkak' %}mars{% else %}venus{% endif %}"></i> 
+                    {{ teacher.gender|title }}
+                </span>
+            {% endfor %}
+        </div>
 
-                  <span class="form-closer cancel-span">Bekor qilish</span>
-                  <button class="submit-form">Saralash</button>
-                </div>
-                </form>
+        <!-- Days Filter -->
+        <p class="filter-block-heading">Kunlari</p>
+        <div id="days" class="filter-days-wrapper">
+            {% for day in days %}
+                <span class="id_{{ day.name|lower }}">
+                    <input type="checkbox" name="days" value="{{ day.name }}" id="id_{{ day.name|lower }}"
+                        {% if day.name in selected_days %}checked{% endif %} />
+                    {{ day.name }}
+                </span>
+            {% endfor %}
+        </div>
+
+        <button class="submit-form" type="submit">Saralash</button>
+    </div>
+</form>
+
+
 
               <input type="text" class="searching-input second" placeholder="SAT kurs" />
             </div>
 
             <div class="course-list">
-              {% for course in courses %}
-                <a href="#" class="course-item">
-                  <div class="course-item-wrapper">
-                    <img src="{{ course.edu_center.logo.url }}" alt="" />
-                    <div class="course-item-text">
-                      <h1 class="course-item-title">{{ course.name }}</h1>
-                      <p class="course-item-level">{{ course.level.name }}</p>
-                      <p class="course-item-days-little">
-                        {% for day in course.days.all %}
-                          {{ day.name }}{% if not forloop.last %}, {% endif %}
-                        {% endfor %}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="course-item-days">
-                    {% for day in course.days.all %}
-                      <div class="course-item-day {% if day.name == 'Har kuni' %} everyday {% endif %}">{{ day.name }}</div>
-                    {% endfor %}
-                    {% if course.intensive == True %}
-                      <div class="course-item-day intensive">
-                        Intensiv
-                        <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f525/512.webp" alt="" />
-                      </div>
-                    {% endif %}
-                    <div class="course-item-time">{{ course.start_time|date:'H:i' }}</div>
-                  </div>
-                </a>
-              {% endfor %}
-            </div>
+              {% if courses.exists %}
+                  {% for course in courses %}
+                      <a href="#" class="course-item">
+                          <div class="course-item-wrapper">
+                              <img src="{{ course.edu_center.logo.url }}" alt="" />
+                              <div class="course-item-text">
+                                  <h1 class="course-item-title">{{ course.name }}</h1>
+                                  <p class="course-item-level">{{ course.level.name }}</p>
+                                  <p class="course-item-days-little">
+                                      {% for day in course.days.all %}
+                                          {{ day.name }}{% if not forloop.last %}, {% endif %}
+                                      {% endfor %}
+                                  </p>
+                              </div>
+                          </div>
+                          <div class="course-item-days">
+                              {% for day in course.days.all %}
+                                  <div class="course-item-day {% if day.name == 'Har kuni' %} everyday {% endif %}">{{ day.name }}</div>
+                              {% endfor %}
+                              {% if course.intensive %}
+                                  <div class="course-item-day intensive">
+                                      Intensiv <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f525/512.webp" alt="Intensive" />
+                                  </div>
+                              {% endif %}
+                              <div class="course-item-time">{{ course.start_time|date:'H:i' }}</div>
+                          </div>
+                      </a>
+                  {% endfor %}
+              {% else %}
+                  <p>Kurslar topilmadi</p>
+              {% endif %}
+          </div>
           </div>
         </div>
       </div>
@@ -122,48 +125,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.js"></script>
   <script>
-    $(document).ready(function () {
-      $('.jquery-multiple').select2()
-    })
-    var slider = document.getElementById('slider')
-    const starting = document.querySelector('#staring_cost')
-    const ending = document.querySelector('#ending_cost')
-    
-    noUiSlider.create(slider, {
-      start: [0, 1000000],
-      connect: true,
-      range: {
-        min: 0,
-        max: 1000000
-      },
-      step: 50000,
-      format: {
-        to: function (value) {
-          return Math.round(value)
-        },
-        from: function (value) {
-          return Number(value)
-        }
-      }
-    })
-    
-    function updateSliderFromInputs() {
-      let startValue = parseInt(starting.value)
-      let endValue = parseInt(ending.value)
-      if (startValue < 0) startValue = 0
-      if (endValue > 5000000) endValue = 5000000
-      if (startValue > endValue) startValue = endValue
-      slider.noUiSlider.set([startValue, endValue])
-    }
-    
-    slider.noUiSlider.on('update', function (values) {
-      starting.value = values[0]
-      ending.value = values[1]
-    })
-    starting.addEventListener('change', updateSliderFromInputs)
-    ending.addEventListener('change', updateSliderFromInputs)
-
-    // for search 
+  
+   // for search 
 
 document.addEventListener('DOMContentLoaded', function () {
     const searchForm = document.querySelector('.blocky-form');
@@ -223,6 +186,48 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+    $(document).ready(function () {
+      $('.jquery-multiple').select2()
+    })
+    var slider = document.getElementById('slider')
+    const starting = document.querySelector('#staring_cost')
+    const ending = document.querySelector('#ending_cost')
+    
+    noUiSlider.create(slider, {
+      start: [0, 1000000],
+      connect: true,
+      range: {
+        min: 0,
+        max: 1000000
+      },
+      step: 50000,
+      format: {
+        to: function (value) {
+          return Math.round(value)
+        },
+        from: function (value) {
+          return Number(value)
+        }
+      }
+    })
+    
+    function updateSliderFromInputs() {
+      let startValue = parseInt(starting.value)
+      let endValue = parseInt(ending.value)
+      if (startValue < 0) startValue = 0
+      if (endValue > 5000000) endValue = 5000000
+      if (startValue > endValue) startValue = endValue
+      slider.noUiSlider.set([startValue, endValue])
+    }
+    
+    slider.noUiSlider.on('update', function (values) {
+      starting.value = values[0]
+      ending.value = values[1]
+    })
+    starting.addEventListener('change', updateSliderFromInputs)
+    ending.addEventListener('change', updateSliderFromInputs)
+
+ 
 
 
 
@@ -230,17 +235,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
 document.addEventListener('DOMContentLoaded', function () {
     const filterForm = document.querySelector('.filter-form-second');
-    const resultsContainer = document.querySelector('.course-list'); 
+    const resultsContainer = document.querySelector('.course-list');
 
     filterForm.addEventListener('submit', function (e) {
-        e.preventDefault();
+        e.preventDefault(); // Prevent the default form submission
 
-        const category = document.querySelector('select[name="category"]').value;
-        const priceMin = document.querySelector('#starting_cost').value;
-        const priceMax = document.querySelector('#ending_cost').value;
-        const teacher = document.querySelector('input[name="teacher"]').value;
+        const categories = Array.from(document.querySelectorAll('select[name="categories[]"] option:checked')).map(opt => opt.value);
+        const min_price = document.getElementById('starting_cost').value || 0;
+        const max_price = document.getElementById('ending_cost').value || 1000000;
+        const gender = document.querySelector('input[name="gender"]:checked') ? document.querySelector('input[name="gender"]:checked').value : '';
+        const days = Array.from(document.querySelectorAll('input[name="days"]:checked')).map(day => day.value);
 
-        fetch(`/filter/?category=${category}&price_min=${priceMin}&price_max=${priceMax}&teacher=${teacher}`, {
+        // AJAX request to filter courses
+        fetch(`/filter-courses-ajax/?categories=${categories}&min_price=${min_price}&max_price=${max_price}&gender=${gender}&days=${days}`, {
             method: 'GET',
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',
@@ -248,10 +255,9 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(response => response.json())
         .then(data => {
-            resultsContainer.innerHTML = '';
-            let resultsHtml = '';
-
+            resultsContainer.innerHTML = ''; // Clear previous results
             if (data.courses.length > 0) {
+                let resultsHtml = '';
                 data.courses.forEach(course => {
                     resultsHtml += `
                         <a href="#" class="course-item">
@@ -260,7 +266,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <div class="course-item-text">
                                     <h1 class="course-item-title">${course.name}</h1>
                                     <p class="course-item-level">${course.level_name}</p>
-                                    <p class="course-item-days-little">${course.days}</p>
+                                    <p class="course-item-days-little">${course.days_html}</p>
                                 </div>
                             </div>
                             <div class="course-item-days">
@@ -271,17 +277,18 @@ document.addEventListener('DOMContentLoaded', function () {
                         </a>
                     `;
                 });
+                resultsContainer.innerHTML = resultsHtml;
             } else {
-                resultsHtml = '<p>No results found.</p>';
+                resultsContainer.innerHTML = '<p>No courses found.</p>';
             }
-            resultsContainer.innerHTML = resultsHtml;
         })
         .catch(error => {
-            console.error('Error fetching filtered results:', error);
+            console.error('Error fetching filtered courses:', error);
             resultsContainer.innerHTML = '<p>Error fetching data</p>';
         });
     });
 });
+
 
 
 
