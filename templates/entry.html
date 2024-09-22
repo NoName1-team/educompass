@@ -16,7 +16,7 @@
 
 {% block content %}
   <main>
-    <div class="entry">
+    <div class="entry section">
       <div class="section-wrapp">
         <div class="initial-container">
           <h1 class="entry-heading">Yo’nalishlarni tanlang (Faqat ikkita yo'nalish tanlash mumkin)</h1>
@@ -27,7 +27,7 @@
           {% endif %}
 
           <!-- Form boshlandi -->
-          <form method="POST">
+          <form method="POST" class="entry-form">
             {% csrf_token %}
             <div class="cat-list entry">
               {% for item in categories_with_center_count %}
