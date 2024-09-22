@@ -36,6 +36,7 @@ INTERNAL_IPS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,6 +48,13 @@ INSTALLED_APPS = [
     'accounts',
     
 ]
+
+JAZZMIN_SETTINGS = {
+    "site_title": "EduCompass Admin",
+    "site_header": "EduCompass",
+    "site_brand": "EduCompass",
+    "welcome_sign": "Welcome to EduCompass Admin",
+}
 
 
 DEBUG_TOOLBAR_CONFIG = {
@@ -116,6 +124,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# settings.py
+QUIZAPI_KEY = 'ONDt6RV8Hmccgsw0a3qDZzRirUZ7R0qHNa3KAgMV'
+
+
+
+LOGIN_URL = 'accounts:login'
+LOGIN_REDIRECT_URL = '/' 
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

@@ -1,14 +1,16 @@
 {% load static %}
 
 <title>
-  {% block title %}
-    EduCompass - Qiziqishlar
-  {% endblock %}
+  {% block title %} EduCompass - Qiziqishlar {% endblock %}
 </title>
+
+{% block css %}
+  <link rel="stylesheet" href="{% static './assets/css/style.css' %}" />
+{% endblock %}
 
 {% block header %}
   <header class="entry-header">
-    <a href="#"><img src="{% static './assets/imgs/logo.svg' %}" alt="" /></a>
+    <a href="#"><img src="{% static './assets/imgs/logo.svg' %}" alt="EduCompass Logo" /></a>
   </header>
 {% endblock %}
 
@@ -17,281 +19,53 @@
     <div class="entry">
       <div class="section-wrapp">
         <div class="initial-container">
-          <h1 class="entry-heading">Yo’nalishlarni tanlang</h1>
+          <h1 class="entry-heading">Yo’nalishlarni tanlang (Faqat ikkita yo'nalish tanlash mumkin)</h1>
+          
+          <!-- Error ko'rsatish uchun -->
+          {% if error %}
+            <p style="color: red;">{{ error }}</p>
+          {% endif %}
 
-          <select id="categorySelect" multiple>
-            <option value="dasturlash">Dasturlash</option>
-            <option value="matematika">Matematika</option>
-            <option value="fizika">Fizika</option>
-            <option value="kimyo">Kimyo</option>
-          </select>
-          <div class="cat-list entry">
-            <div class="cat-item" data-key-id="dasturlash">
-              <div class="cat-item_wrapper">
-                <div class="cat-item-icon">
-                  <i class="fa-regular fa-calculator-simple"></i>
+          <!-- Form boshlandi -->
+          <form method="POST">
+            {% csrf_token %}
+            <div class="cat-list entry">
+              {% for item in categories_with_center_count %}
+                <div class="cat-item" data-key-id="{{ item.category.id }}">
+                  <div class="cat-item_wrapper">
+                    <div class="cat-item-icon">
+                      <i class="fa-regular fa-icon"></i> <!-- Placeholder icon -->
+                    </div>
+                    <div class="cat-item-texts">
+                      <p>{{ item.category.name }}</p>
+                      <span>{{ item.center_count }} o'quv markaz</span>
+                    </div>
+                  </div>
+                  <div class="cat-item-selection-wrapper">
+                    <input type="checkbox" name="categories" value="{{ item.category.id }}">
+                    <i class="fa-solid fa-check"></i>
+                  </div>
                 </div>
-                <div class="cat-item-texts">
-                  <p>SAT</p>
-                  <span>15ta o'quv markaz</span>
-                </div>
-              </div>
-              <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f525/512.webp" alt="" />
-              <div class="cat-item-selection-wrapper">
-                <i class="fa-solid fa-check"></i>
-              </div>
+              {% endfor %}
             </div>
-            <div class="cat-item" data-key-id="matematika">
-              <div class="cat-item_wrapper">
-                <div class="cat-item-icon">
-                  <i class="fa-regular fa-rectangle-terminal"></i>
-                </div>
-                <div class="cat-item-texts">
-                  <p>Dasturlash</p>
-                  <span>25ta o'quv markaz</span>
-                </div>
-              </div>
-              <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f525/512.webp" alt="" />
-              <div class="cat-item-selection-wrapper">
-                <i class="fa-solid fa-check"></i>
-              </div>
-            </div>
-            <div class="cat-item" data-key-id="matematika">
-              <div class="cat-item_wrapper">
-                <div class="cat-item-icon">
-                  <!-- <i class="fa-brands fa-bluesky"></i> -->
-                  <i class="fa-regular fa-share-nodes"></i>
-                </div>
-                <div class="cat-item-texts">
-                  <p>SMM</p>
-                  <span>17ta o'quv markaz</span>
-                </div>
-              </div>
-              <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f525/512.webp" alt="" />
-              <div class="cat-item-selection-wrapper">
-                <i class="fa-solid fa-check"></i>
-              </div>
-            </div>
-            <div class="cat-item">
-              <div class="cat-item_wrapper">
-                <div class="cat-item-icon">
-                  <i class="fa-regular fa-pen-paintbrush"></i>
-                </div>
-                <div class="cat-item-texts">
-                  <p>Grafik Dizayn</p>
-                  <span>5ta o'quv markaz</span>
-                </div>
-              </div>
-              <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f525/512.webp" alt="" />
-              <div class="cat-item-selection-wrapper">
-                <i class="fa-solid fa-check"></i>
-              </div>
-            </div>
-            <div class="cat-item">
-              <div class="cat-item_wrapper">
-                <div class="cat-item-icon">
-                  <i class="fa-regular fa-language"></i>
-                </div>
-                <div class="cat-item-texts">
-                  <p>Ingliz tili</p>
-                  <span>35ta o'quv markaz</span>
-                </div>
-              </div>
-              <div class="cat-item-selection-wrapper">
-                <i class="fa-solid fa-check"></i>
-              </div>
-            </div>
-            <div class="cat-item">
-              <div class="cat-item_wrapper">
-                <div class="cat-item-icon">
-                  <i class="fa-regular fa-shapes"></i>
-                </div>
-                <div class="cat-item-texts">
-                  <p>3D modelling</p>
-                  <span>20ta o'quv markaz</span>
-                </div>
-              </div>
-              <div class="cat-item-selection-wrapper">
-                <i class="fa-solid fa-check"></i>
-              </div>
-            </div>
-            <div class="cat-item">
-              <div class="cat-item_wrapper">
-                <div class="cat-item-icon">
-                  <i class="fa-regular fa-language"></i>
-                </div>
-                <div class="cat-item-texts">
-                  <p>IELTS</p>
-                  <span>33ta o'quv markaz</span>
-                </div>
-              </div>
-              <div class="cat-item-selection-wrapper">
-                <i class="fa-solid fa-check"></i>
-              </div>
-            </div>
-            <div class="cat-item">
-              <div class="cat-item_wrapper">
-                <div class="cat-item-icon">
-                  <i class="fa-regular fa-calculator"></i>
-                </div>
-                <div class="cat-item-texts">
-                  <p>Matematika</p>
-                  <span>14ta o'quv markaz</span>
-                </div>
-              </div>
-              <div class="cat-item-selection-wrapper">
-                <i class="fa-solid fa-check"></i>
-              </div>
-            </div>
-            <div class="cat-item">
-              <div class="cat-item_wrapper">
-                <div class="cat-item-icon">
-                  <i class="fa-regular fa-robot"></i>
-                </div>
-                <div class="cat-item-texts">
-                  <p>Robototexnika</p>
-                  <span>17ta o'quv markaz</span>
-                </div>
-              </div>
-              <div class="cat-item-selection-wrapper">
-                <i class="fa-solid fa-check"></i>
-              </div>
-            </div>
-            <div class="cat-item">
-              <div class="cat-item_wrapper">
-                <div class="cat-item-icon">
-                  <i class="fa-regular fa-flask"></i>
-                </div>
-                <div class="cat-item-texts">
-                  <p>Kimyo</p>
-                  <span>17ta o'quv markaz</span>
-                </div>
-              </div>
-              <div class="cat-item-selection-wrapper">
-                <i class="fa-solid fa-check"></i>
-              </div>
-            </div>
-            <div class="cat-item">
-              <div class="cat-item_wrapper">
-                <div class="cat-item-icon">
-                  <i class="fa-regular fa-gamepad-modern"></i>
-                </div>
-                <div class="cat-item-texts">
-                  <p>Oyin yaratish</p>
-                  <span>17ta o'quv markaz</span>
-                </div>
-              </div>
-              <div class="cat-item-selection-wrapper">
-                <i class="fa-solid fa-check"></i>
-              </div>
-            </div>
-            <div class="cat-item">
-              <div class="cat-item_wrapper">
-                <div class="cat-item-icon">
-                  <i class="fa-regular fa-file-invoice"></i>
-                </div>
-                <div class="cat-item-texts">
-                  <p>Tarix</p>
-                  <span>17ta o'quv markaz</span>
-                </div>
-              </div>
-              <div class="cat-item-selection-wrapper">
-                <i class="fa-solid fa-check"></i>
-              </div>
-            </div>
-            <div class="cat-item">
-              <div class="cat-item_wrapper">
-                <div class="cat-item-icon">
-                  <i class="fa-regular fa-calculator"></i>
-                </div>
-                <div class="cat-item-texts">
-                  <p>Matematika</p>
-                  <span>14ta o'quv markaz</span>
-                </div>
-              </div>
-              <div class="cat-item-selection-wrapper">
-                <i class="fa-solid fa-check"></i>
-              </div>
-            </div>
-            <div class="cat-item">
-              <div class="cat-item_wrapper">
-                <div class="cat-item-icon">
-                  <i class="fa-regular fa-robot"></i>
-                </div>
-                <div class="cat-item-texts">
-                  <p>Robototexnika</p>
-                  <span>17ta o'quv markaz</span>
-                </div>
-              </div>
-              <div class="cat-item-selection-wrapper">
-                <i class="fa-solid fa-check"></i>
-              </div>
-            </div>
-            <div class="cat-item">
-              <div class="cat-item_wrapper">
-                <div class="cat-item-icon">
-                  <i class="fa-regular fa-flask"></i>
-                </div>
-                <div class="cat-item-texts">
-                  <p>Kimyo</p>
-                  <span>17ta o'quv markaz</span>
-                </div>
-              </div>
-              <div class="cat-item-selection-wrapper">
-                <i class="fa-solid fa-check"></i>
-              </div>
-            </div>
-            <div class="cat-item">
-              <div class="cat-item_wrapper">
-                <div class="cat-item-icon">
-                  <i class="fa-regular fa-gamepad-modern"></i>
-                </div>
-                <div class="cat-item-texts">
-                  <p>Oyin yaratish</p>
-                  <span>17ta o'quv markaz</span>
-                </div>
-              </div>
-              <div class="cat-item-selection-wrapper">
-                <i class="fa-solid fa-check"></i>
-              </div>
-            </div>
-            <div class="cat-item">
-              <div class="cat-item_wrapper">
-                <div class="cat-item-icon">
-                  <i class="fa-regular fa-file-invoice"></i>
-                </div>
-                <div class="cat-item-texts">
-                  <p>Tarix</p>
-                  <span>17ta o'quv markaz</span>
-                </div>
-              </div>
-              <div class="cat-item-selection-wrapper">
-                <i class="fa-solid fa-check"></i>
-              </div>
-            </div>
-          </div>
+            <button type="submit">Keyingi bosqich</button>
+          </form>
+          <!-- Form tugadi -->
         </div>
       </div>
-      <div class="bg-pattern"></div>
     </div>
   </main>
 {% endblock %}
 
 {% block scripts %}
-  <!-- Local -->
   <script>
     document.querySelectorAll('.cat-item').forEach(function (item) {
       item.addEventListener('click', function () {
-        const keyId = item.getAttribute('data-key-id')
-        item.classList.toggle('selected')
-        const selectElement = document.getElementById('categorySelect')
-        const options = selectElement.options
-        for (let i = 0; i < options.length; i++) {
-          if (options[i].value === keyId) {
-            options[i].selected = !options[i].selected
-          }
-        }
-      })
-    })
+        const keyId = item.getAttribute('data-key-id');
+        item.classList.toggle('selected');
+        const inputElement = item.querySelector('input[type="checkbox"]');
+        inputElement.checked = !inputElement.checked;
+      });
+    });
   </script>
 {% endblock %}

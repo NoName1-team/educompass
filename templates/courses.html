@@ -22,64 +22,60 @@
                   </svg>
                 </span>
               </form>
-<form action="" method="get" class="filter-form-second">
-    <div class="filter-wrapper">
-        <div class="filter-heading-wrapper">
-            <p class="block-heading">Filter</p>
-            <span class="form-closer"><i class="fa-regular fa-xmark-large"></i></span>
-        </div>
+                    <form action="" method="get" class="filter-form-second">
+                        <div class="filter-wrapper">
+                            <div class="filter-heading-wrapper">
+                                <p class="block-heading">Filter</p>
+                                <span class="form-closer"><i class="fa-regular fa-xmark-large"></i></span>
+                            </div>
 
-        <!-- Category Filter -->
-        <p class="filter-block-heading">Teglar</p>
-        <select id="categories" class="jquery-multiple filter-input" name="categories" multiple="multiple">
-            {% for category in categories %}
-                <option value="{{ category.id }}" {% if category.id|stringformat:"s" in selected_categories %}selected{% endif %}>
-                    {{ category.name }}
-                </option>
-            {% endfor %}
-        </select>
+                            <!-- Category Filter -->
+                            <p class="filter-block-heading">Teglar</p>
+                            <select id="categories" class="jquery-multiple filter-input" name="categories" multiple="multiple">
+                                {% for category in categories %}
+                                    <option value="{{ category.id }}" {% if category.id|stringformat:"s" in selected_categories %}selected{% endif %}>
+                                        {{ category.name }}
+                                    </option>
+                                {% endfor %}
+                            </select>
 
-        <!-- Price Filter -->
-        <p class="filter-block-heading">Narxlar</p>
-        <div class="filter-costs_wrapper">
-            <input type="number" id="staring_cost" name="min_price" value="{{ min_price }}" placeholder="Min price" />
-            <input type="number" id="ending_cost" name="max_price" value="{{ max_price }}" placeholder="Max price" />
-        </div>
+                            <!-- Price Filter -->
+                            <p class="filter-block-heading">Narxlar</p>
+                            <div class="filter-costs_wrapper">
+                                <input type="number" id="staring_cost" name="min_price" value="{{ min_price }}" placeholder="Min price" />
+                                <input type="number" id="ending_cost" name="max_price" value="{{ max_price }}" placeholder="Max price" />
+                            </div>
 
-        <!-- Teacher Filter (Gender) -->
-        <p class="filter-block-heading">O'qituvchi</p>
-        <div class="filter-gender-wrapper">
-            {% for teacher in teachers %}
-                <span class="id_{{ teacher.gender }}">
-                    <input type="radio" name="gender" value="{{ teacher.gender }}" id="id_{{ teacher.gender }}"
-                        {% if teacher.gender == selected_gender %}checked{% endif %} />
-                    <i class="fa-regular fa-{% if teacher.gender == 'Erkak' %}mars{% else %}venus{% endif %}"></i> 
-                    {{ teacher.gender|title }}
-                </span>
-            {% endfor %}
-        </div>
+                            <!-- Teacher Filter (Gender) -->
+                            <p class="filter-block-heading">O'qituvchi</p>
+                            <div class="filter-gender-wrapper">
+                                {% for teacher in teachers %}
+                                    <span class="id_{{ teacher.gender }}">
+                                        <input type="radio" name="gender" value="{{ teacher.gender }}" id="id_{{ teacher.gender }}"
+                                            {% if teacher.gender == selected_gender %}checked{% endif %} />
+                                        <i class="fa-regular fa-{% if teacher.gender == 'Erkak' %}mars{% else %}venus{% endif %}"></i> 
+                                        {{ teacher.gender|title }}
+                                    </span>
+                                {% endfor %}
+                            </div>
 
-        <!-- Days Filter -->
-        <p class="filter-block-heading">Kunlari</p>
-        <div id="days" class="filter-days-wrapper">
-            {% for day in days %}
-                <span class="id_{{ day.name|lower }}">
-                    <input type="checkbox" name="days" value="{{ day.name }}" id="id_{{ day.name|lower }}"
-                        {% if day.name in selected_days %}checked{% endif %} />
-                    {{ day.name }}
-                </span>
-            {% endfor %}
-        </div>
+                            <!-- Days Filter -->
+                            <p class="filter-block-heading">Kunlari</p>
+                        <div id="days" class="filter-days-wrapper">
+                            {% for day in days %}
+                                <span class="id_{{ day.name|lower }}">
+                                    <input type="checkbox" name="days" value="{{ day.name }}" id="id_{{ day.name|lower }}"
+                                        {% if day.name in selected_days %}checked{% endif %} />
+                                    {{ day.name }}
+                                </span>
+                            {% endfor %}
+                        </div>
 
-        <button class="submit-form" type="submit">Saralash</button>
-    </div>
-</form>
-
-
-
+                        <button class="submit-form" type="submit">Saralash</button>
+                    </div>
+                </form>
               <input type="text" class="searching-input second" placeholder="SAT kurs" />
             </div>
-
             <div class="course-list">
               {% if courses.exists %}
                   {% for course in courses %}

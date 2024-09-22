@@ -82,13 +82,39 @@
                 </div>
               </div>
               <!-- <span class="spec-round header-changer"><i class="fa-regular fa-moon"></i></span> -->
-              <a href="" class="header-link login spec-round">
-                Kirish<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M11.6802 14.62L14.2402 12.06L11.6802 9.5" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                  <path d="M4 12.0601H14.17" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                  <path d="M12 4C16.42 4 20 7 20 12C20 17 16.42 20 12 20" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </a>
+              {% if user.is_authenticated %}
+                <a href="" class="header-link login spec-round">
+                  Profil<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.6802 14.62L14.2402 12.06L11.6802 9.5" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M4 12.0601H14.17" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M12 4C16.42 4 20 7 20 12C20 17 16.42 20 12 20" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </a>
+
+                <a href="{% url 'accounts:logout' %}" class="header-link login spec-round">
+                  Chiqish<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.6802 14.62L14.2402 12.06L11.6802 9.5" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M4 12.0601H14.17" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M12 4C16.42 4 20 7 20 12C20 17 16.42 20 12 20" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </a>
+              {% else %}
+                <a href="{% url 'accounts:login' %}" class="header-link login spec-round">
+                  Kirish<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.6802 14.62L14.2402 12.06L11.6802 9.5" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M4 12.0601H14.17" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M12 4C16.42 4 20 7 20 12C20 17 16.42 20 12 20" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </a>
+
+                <a href="{% url 'accounts:sign-up' %}" class="header-link login spec-round">
+                  Ro'yxatdan o'tish<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.6802 14.62L14.2402 12.06L11.6802 9.5" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M4 12.0601H14.17" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M12 4C16.42 4 20 7 20 12C20 17 16.42 20 12 20" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </a>
+              {% endif %}
             </div>
           </div>
         </div>
@@ -201,7 +227,7 @@
             <div class="hero-banner">
               <p class="hero-banner-support-text">EduCompass bilan tanishing. O'qish uchun joy qidiring.</p>
               <h1>Qayerda <span>ta'lim olish</span> mumkinligini bilib oling!</h1>
-              <form action="{% url 'main:ajax_search' %}" id="search-form" class="searching-form">  
+              <form action="{% url 'main:ajax_search' %}" id="search-form" class="searching-form">
                 <div class="searching-form_wrapper">
                   <input type="text" placeholder="Search..." autocomplete="off" />
                   <span>Izlash <i class="fa-regular fa-search"></i></span>
@@ -302,4 +328,5 @@
     {% block scripts %}
 
     {% endblock %}
-
+  </body>
+</html>

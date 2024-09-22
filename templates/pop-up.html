@@ -1,33 +1,33 @@
 {% load static %}
-    <title>
-        {% block title %} EduCompass - Start{% endblock title %}
-    </title>
-
-    {% block header %}
-    <header class="entry-header">
-        <a href="#">
-            <img src="{% static './assets/imgs/logo.svg' %}" alt="">
-        </a>
-    </header>
-    {% endblock header %}
-
+<title>
+  {% block title %}
+    EduCompass - Start
+  {% endblock %}
+</title>
+{% block css %}
+  <link rel="stylesheet" href="{% static './assets/css/style.css' %}" />
+{% endblock %}
+{% block header %}
+  <header class="entry-header">
+    <a href="#"><img src="{% static './assets/imgs/logo.svg' %}" alt="" /></a>
+  </header>
+{% endblock %}
 
 {% block content %}
-
-    <main>
-        <div class="pop-up">
-            <div class="section-wrapp">
-                <div class="initial-container">
-                    <div class="pop-up-wrapper">
-                        <img src="./assets/imgs/pop-im.png" alt="">
-                        <h3>Ingliz tili darajangizni bilib oling</h3>
-                        <p>Agar tayyor bo’lsangiz “Boshlash” tugmasini bosing.</p>
-                        <a href="#" class="pop-up-start">Boshlash</a>
-                        <a href="#" class="pop-up-skip">O’tkizib yuborish</a>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-pattern"></div>
+  <main>
+    <div class="pop-up">
+      <div class="section-wrapp">
+        <div class="initial-container">
+          <div class="pop-up-wrapper">
+            <img src="./assets/imgs/pop-im.png" alt="" />
+            <h3>Ingliz tili darajangizni bilib oling</h3>
+            <p>Agar tayyor bo’lsangiz “Boshlash” tugmasini bosing.</p>
+            <a href="{% url 'accounts:quiz_page' %}" class="pop-up-start">Boshlash</a>
+            <a href="{% url 'main:home' %}" class="pop-up-skip">O’tkizib yuborish</a>
+          </div>
         </div>
-    </main>
-{% endblock content %}
+      </div>
+      <div class="bg-pattern"></div>
+    </div>
+  </main>
+{% endblock %}

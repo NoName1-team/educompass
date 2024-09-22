@@ -1,7 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
 
-
 class SignUpForm(forms.ModelForm):
     phone = forms.CharField(
         max_length=15,
@@ -22,6 +21,3 @@ class SignUpForm(forms.ModelForm):
         if commit:
             user.save()
         return user
-
-class SetPasswordForm(forms.Form):
-    password = forms.CharField(widget=forms.PasswordInput(), label="Yangi parol")

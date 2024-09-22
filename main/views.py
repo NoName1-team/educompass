@@ -1,5 +1,7 @@
 from django.shortcuts import render
-
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
 from django.http import JsonResponse
 from django.views.generic import ListView
 from django.db.models import Count, Q
@@ -8,10 +10,18 @@ from .models import EduCenter, Course, Category, Events, Day, Teacher, Gender
 
 
 
-class HomePageView(ListView):
+
+class HomePageView(LoginRequiredMixin, ListView):
     model = EduCenter
     template_name = 'index.html'
     context_object_name = 'edu_centers'
+    login_url = reverse_lazy('accounts:login')  
+
+    def handle_no_permission(self):
+        if self.request.user.is_authenticated:
+            return redirect('main:home')  
+        else:
+            return redirect(self.login_url) 
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -113,13 +123,17 @@ class CourseView(ListView):
         context['max_price'] = self.request.GET.get('max_price', '')
         context['selected_gender'] = self.request.GET.get('gender', '')
         context['selected_days'] = self.request.GET.getlist('days')
+        context['level'] = self.request.GET.get('level', '')
+        context['score'] = self.request.GET.get('score', '')
 
         return context
     
     def get_queryset(self):
         queryset = Course.objects.all()
 
-        # Get filter parameters from GET request
+        level = self.request.GET.get('level')
+        if level:
+            queryset = queryset.filter(level__name=level)
         categories = self.request.GET.getlist('categories')
         min_price = self.request.GET.get('min_price', None)
         max_price = self.request.GET.get('max_price', None)
@@ -198,11 +212,13 @@ def search_edu_centers(request):
             centers_data.append({
                 'name': center.name,
                 'logo': request.build_absolute_uri(center.logo.url) if center.logo else '',
-                'edu_type': center.edu_type.name if center.edu_type else '',  # Extract the name of edu_type
+                'edu_type': center.edu_type.name if center.edu_type else '',  
                 'location': center.location,
                 'verify': center.verify,
                 'partner': center.partner,
             })
 
     return JsonResponse({'centers': centers_data})
+
+
     

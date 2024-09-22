@@ -1,10 +1,14 @@
 {% load static %}
 
 <title>
-  {% block content %}
+  {% block title %}
     EduCompass - Tests
   {% endblock %}
 </title>
+
+{% block css %}
+  <link rel="stylesheet" href="{% static './assets/css/style.css' %}" />
+{% endblock %}
 
 {% block header %}
   <header class="entry-header">
@@ -18,22 +22,14 @@
       <div class="section-wrapp">
         <div class="initial-container">
           <div class="test-wrapper">
-            <div class="quiz-container">
+            <div class="quiz-container" id="quiz-container">
               <div class="progress-container">
                 <div class="progress-bar" id="progress-bar"></div>
                 <span id="timer" class="timer">15:00</span>
               </div>
-
-              <div class="question-container">
-                <h2>(1/15) Was it Bobur ___ Boburnoma?</h2>
-              </div>
-
-              <div class="options-container">
-                <button class="option">who wrote</button>
-                <button class="option">who wrote</button>
-                <button class="option">who wrote</button>
-                <button class="option">who wrote</button>
-              </div>
+              <div id="quiz-questions"></div>
+              <button id="submit-btn" class="submit-btn" style="display: none;">Submit Answers</button>
+              <div id="result"></div>
             </div>
           </div>
         </div>
@@ -43,28 +39,105 @@
 {% endblock %}
 
 {% block scripts %}
-  <!-- Local -->
   <script>
-    let totalTime = 15 * 60
-    let timeRemaining = totalTime
-    
-    const timerElement = document.getElementById('timer')
-    const progressBarElement = document.getElementById('progress-bar')
-    
+    const apiKey = 'ONDt6RV8Hmccgsw0a3qDZzRirUZ7R0qHNa3KAgMV';  // Replace with your QuizAPI key
+    const apiUrl = 'https://quizapi.io/api/v1/questions?category=code&difficulty=easy&limit=10';  // Ensure limit=10 is specified
+
+    async function fetchQuestions() {
+        const response = await fetch(apiUrl, {
+            headers: {
+                'X-Api-Key': apiKey
+            }
+        });
+        const data = await response.json();
+        return data;
+    }
+
+    function displayQuestions(questions) {
+        const quizQuestionsContainer = document.getElementById('quiz-questions');
+        const submitButton = document.getElementById('submit-btn');
+        let quizHTML = '';
+
+        questions.forEach((question, index) => {
+            quizHTML += `
+                <div class="question-item">
+                    <h2>(${index + 1}/${questions.length}) ${question.question}</h2>
+                    <div class="options-container">
+                        ${Object.keys(question.answers).map(answer => question.answers[answer] ? `
+                            <label>
+                                <input type="radio" name="question${index}" value="${answer}">
+                                ${question.answers[answer]}
+                            </label><br>
+                        ` : '').join('')}
+                    </div>
+                </div>
+            `;
+        });
+
+        quizQuestionsContainer.innerHTML = quizHTML;
+        submitButton.style.display = 'block';  // Show the submit button once questions are loaded
+    }
+
+    function calculateScore(questions) {
+        let score = 0;
+
+        questions.forEach((question, index) => {
+            const selectedAnswer = document.querySelector(`input[name="question${index}"]:checked`);
+
+            if (selectedAnswer && question.correct_answers[selectedAnswer.value + '_correct'] === 'true') {
+                score++;
+            }
+        });
+
+        return score;
+    }
+
+    document.getElementById('submit-btn').addEventListener('click', async () => {
+        const questions = await fetchQuestions();
+        const score = calculateScore(questions);
+
+        const resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = `You scored ${score} out of ${questions.length}`;
+
+        let level;
+        if (score >= 8) {
+            level = 'Level2';
+        } else if (score >= 5) {
+            level = 'Level1';
+        } else if (score >= 3) {
+            level = 'Boshlanuvchi';
+        } else {
+            level = 'Foundation';
+        }
+
+        resultDiv.innerHTML += `Your level is: <a href="/courses/?level=${level}" target="_blank">${level}`;
+    });
+
+    window.onload = async () => {
+        const questions = await fetchQuestions();
+        displayQuestions(questions);
+    };
+
+    let totalTime = 15 * 60;
+    let timeRemaining = totalTime;
+    const timerElement = document.getElementById('timer');
+    const progressBarElement = document.getElementById('progress-bar');
+
     function updateTimer() {
-      const minutes = Math.floor(timeRemaining / 60)
-      const seconds = timeRemaining % 60
-      timerElement.innerHTML = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`
-      progressPercentage = (timeRemaining / totalTime) * 100
-      progressBarElement.style.width = progressPercentage + '%'
+      const minutes = Math.floor(timeRemaining / 60);
+      const seconds = timeRemaining % 60;
+      timerElement.innerHTML = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+      const progressPercentage = (timeRemaining / totalTime) * 100;
+      progressBarElement.style.width = progressPercentage + '%';
       if (timeRemaining > 0) {
-        timeRemaining--
+        timeRemaining--;
       } else {
-        clearInterval(timerInterval)
-        alert('Vaqt tugadi!')
+        clearInterval(timerInterval);
+        alert('Time’s up!');
+        document.getElementById('submit-btn').click();
       }
     }
-    
-    const timerInterval = setInterval(updateTimer, 1000)
+
+    const timerInterval = setInterval(updateTimer, 1000);
   </script>
 {% endblock %}
