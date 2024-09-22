@@ -1520,9 +1520,10 @@ footer {
     justify-content: space-between;
 }
 
-.entry {
+.entry.section {
     background: linear-gradient(to bottom, #5667FE, #041EFF);
     padding-top: 100px;
+    height: 100vh;
 }
 
 .bg-pattern {
@@ -1661,7 +1662,6 @@ footer {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     min-width: 900px;
     width: 100%;
-    text-align: center;
 }
 
 .progress-container {
@@ -1709,9 +1709,10 @@ footer {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
+    margin: 20px 0;
 }
 
-.option {
+.options-container label {
     background-color: var(--color-white);
     border-radius: 8px;
     padding: 10px 20px;
@@ -1903,4 +1904,19 @@ footer {
 
 .profile-detail-banner-second-part {
     padding-top: 50px;
+}
+
+
+.entry-form button,
+.submit-btn {
+    padding: 10px 20px;
+    background: var(--color-white);
+    color: var(--main-gradiend);
+    border: none;
+    border-radius: 8px;
+    color: var(--main-color);
+}
+
+.quiz-questions h2 {
+    text-align: left !important;
 }
